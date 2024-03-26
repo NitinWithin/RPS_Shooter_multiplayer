@@ -1,0 +1,16 @@
+Build
+Packages
+UserSettings
+*.sln
+.vsconfig
+.vs
+Logs
+.git
+obj
+PunDemos.DemoHubEditor.csproj
+PunDemos.DemoSlotcarEditor.csproj
+Assets/Photon
+Assets/OccaSoftware
+Assets/TextMesh\ Pro
+*.meta
+Library
