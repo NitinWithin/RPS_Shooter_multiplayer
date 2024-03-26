@@ -12,34 +12,8 @@ public class PlayerTeamAndCharacterChoice : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-
-        if (_gameUI != null &&
-           _teamPanel != null &&
-           _CharacterPanel != null &&
-           _redButton != null &&
-           _blueButton != null &&
-           _rockButton != null &&
-           _paperButton != null &&
-           _scissorsButton != null)
-        {
-            Debug.LogError("ALL fields loaded000");
-        }
-        else
-        {
-            Debug.LogError("Something is null");
-        }
-        
-
-        if (_teamPanel != null)
-        {
-            _redButton = _teamPanel.transform.Find("RedButton").GetComponent<Button>();
-            _blueButton = _teamPanel.transform.Find("BlueButton").GetComponent<Button>();
-        }
-
-        Time.timeScale = 0f;
-        _teamPanel.SetActive(true);
         _CharacterPanel.SetActive(false);
-       
+        Time.timeScale = 0f;      
     }
 
     private void Update()
@@ -54,7 +28,8 @@ public class PlayerTeamAndCharacterChoice : MonoBehaviourPunCallbacks
         }
 
         DisableCharacterButtons();
-        UpdateTagAndLayer(_playerTag, _playerlayer);
+        //UpdateTagAndLayer(_playerTag, _playerlayer);
+        Time.timeScale = 1f;
     }
 
     public void setRedTeam()
@@ -62,32 +37,37 @@ public class PlayerTeamAndCharacterChoice : MonoBehaviourPunCallbacks
         _playerlayer = "Player_Red";
         _teamPanel.SetActive(false);
         _CharacterPanel.SetActive(true);
+        //Destroy(_teamPanel);
+        //Destroy(_CharacterPanel);
     }
     
     public void setBlueTeam()
     {
 
         _playerlayer = "Player_Blue";
-        Destroy(_teamPanel);
+        _teamPanel.SetActive(false);
         _CharacterPanel.SetActive(true);
     }
 
     public void setRockTeam()
     {
         _playerTag = "Rock";
-        Destroy(_CharacterPanel);
+        _CharacterPanel.SetActive(false);
+        UpdateTagAndLayer(_playerTag, _playerlayer);
     }
     
     public void setPaperTeam()
     {
         _playerTag = "Paper";
         _CharacterPanel.SetActive(false);
+        UpdateTagAndLayer(_playerTag, _playerlayer);
     }
     
     public void setScissorsTeam()
     {
         _playerTag = "Scissors";
         _CharacterPanel.SetActive(false);
+        UpdateTagAndLayer(_playerTag, _playerlayer);
     }
 
 
@@ -175,25 +155,42 @@ public class PlayerTeamAndCharacterChoice : MonoBehaviourPunCallbacks
         }
     }
 
-
-    [PunRPC]
-    void SetTagAndLayer(string tag, string layer)
-    {
-        if (photonView.IsMine) // Ensure the RPC is only executed on the local player's GameObject
-        {
-            photonView.gameObject.transform.parent.gameObject.tag = tag;
-            photonView.gameObject.transform.parent.gameObject.layer = LayerMask.NameToLayer(layer);
-            Debug.Log("RPC CALL SUCCESS");
-        }
-    }
-
     // Call this method to update the tag and layer for a specific player
-    public void UpdateTagAndLayer(string tag, string layer)
+    public void UpdateTagAndLayer(string character, string team)
     {
-        if (PhotonNetwork.LocalPlayer ==
+       foreach(Player _player in PhotonNetwork.PlayerList)
         {
+            if(_player.IsLocal)
+            {
+                ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable
+                {
+                    { "Team", PlayerPrefs.GetString("team") },
+                    { "Character", PlayerPrefs.GetString("character") }
+                };
+                
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
 
-            photonView.RPC("SetTagAndLayer", photonView.Owner, tag, layer);
+                if (_player.CustomProperties["Team"] != null)
+                {
+                    // Use the custom property value
+                    Debug.Log("TEAM: " + (string)PhotonNetwork.LocalPlayer.CustomProperties["Team"] + " for " + _player.NickName);
+                }
+                else
+                {
+                    Debug.LogWarning("Custom property 'team' not found or has invalid type for Player " + _player.NickName);
+                }
+                if (_player.CustomProperties["Character"] != null)
+                {
+                    // Use the custom property value
+                    Debug.Log("Character: " + (string)_player.CustomProperties["Team"] + " for " + _player.NickName);
+                }
+                else
+                {
+                    Debug.LogWarning("Custom property 'character' not found or has invalid type for Player " + _player.NickName);
+                }
+            }
+            
+
         }
     }
 }
