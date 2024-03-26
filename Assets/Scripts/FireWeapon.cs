@@ -85,10 +85,10 @@ public class FireWeapon : MonoBehaviourPunCallbacks
 
     public void ApplyRPSLogic(GameObject _enemyPlayer)
     {
-        string _playerTag = _player.tag.ToLower();
-        string _enemyTag = _enemyPlayer.tag.ToLower();
+        _enemyPlayer.GetComponent<Damage>().DoDamage(20);
+        // TODO: Change this to use PHOTON TEAMS
 
-        if (_enemyPlayer.layer == photonView.gameObject.layer) // When in the same team
+       /* if (_enemyPlayer.layer == photonView.gameObject.layer) // When in the same team
         {
             _enemyPlayer.GetComponent<Damage>().DoDamage(5);
         }
@@ -106,7 +106,7 @@ public class FireWeapon : MonoBehaviourPunCallbacks
             {
                 StunPlayer(_enemyPlayer);
             }
-        }
+        }*/
 
     }
 
