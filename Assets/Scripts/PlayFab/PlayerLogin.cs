@@ -10,10 +10,19 @@ public class PlayerLogin : MonoBehaviour
 {
     #region Variables
 
-     private string _useremail;
-     private string _password;
+     private string _loginuseremail;
+     private string _loginpassword;
+
+    private string _regUserName;
+    private string _regPassword;
+    private string _regEmail;
 
     [SerializeField] private TextMeshProUGUI _errorLabel;
+    [SerializeField] private TextMeshProUGUI _regerrorLabel;
+    [SerializeField] private Canvas _registrationCanvas;
+    [SerializeField] private Canvas _loginCanvas;
+    [SerializeField] private TMP_InputField _passwordField;
+    [SerializeField] private TMP_InputField _confirmPasswordField;
     #endregion
 
     #region Default Unity Methods
@@ -21,6 +30,8 @@ public class PlayerLogin : MonoBehaviour
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         _errorLabel.enabled = false;
+        _regerrorLabel.enabled = false;
+        //_registrationCanvas.enabled = false;
     }
 
     // Start is called before the first frame update
@@ -62,13 +73,23 @@ public class PlayerLogin : MonoBehaviour
         Debug.Log("Login Result : " + result);
     }
 
+    private void OnRegistrationFailure(PlayFabError error)
+    {
+        Debug.Log("Registration Failed: " + error);
+    }
+
+    private void OnRegisterationSuccess(RegisterPlayFabUserResult result)
+    {
+        Debug.Log("Registration Success: " + result.ToString());
+    }
+
     #endregion
 
     #region private methods
     private bool IsValideUserEmail()
     {
         bool _isValid = false;
-        if(_useremail.Length > 0) 
+        if(_loginuseremail.Length > 0) 
         {
             _isValid = true;
         }
@@ -77,9 +98,20 @@ public class PlayerLogin : MonoBehaviour
 
     private void LoginWithEmailID()
     {
-        Debug.Log("Login in with " + _useremail + " and " +  _password);
-        var request = new LoginWithEmailAddressRequest { Email = _useremail, Password = _password };
+        var request = new LoginWithEmailAddressRequest { Email = _loginuseremail, Password = _loginpassword };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginWithEmailIDSuccess, OnFailure);
+    }
+
+    private void RegisterUser()
+    {
+        if (_regUserName != null &&  _regPassword != null && _regEmail != null)
+        {
+            var request = new RegisterPlayFabUserRequest {Email = _regEmail,
+                                                          Password = _regPassword,
+                                                          DisplayName = _regUserName,
+                                                          Username = _regUserName };
+            PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterationSuccess, OnRegistrationFailure);
+        }
     }
 
 
@@ -88,32 +120,71 @@ public class PlayerLogin : MonoBehaviour
 
     #region public methods
     public void SetUserEmail(string email)
-    {
-        _useremail = email;
-        PlayerPrefs.SetString("USEREMAIL", _useremail);
+    { 
+        _loginuseremail = email;
+        PlayerPrefs.SetString("USEREMAIL", _loginuseremail);
         Debug.Log("EMAIL: " + PlayerPrefs.GetString("USEREMAIL"));
     }
 
     public void SetPassword(string password)
     {
-        _password = password;
-        PlayerPrefs.SetString("USERPASS", _password);
+        _loginpassword = password;
+        PlayerPrefs.SetString("USERPASS", _loginpassword);
         Debug.Log("password: " + PlayerPrefs.GetString("USERPASS"));
+    }
+
+    public void EnableRegistration()
+    {
+        _loginCanvas.enabled = false;
+        _registrationCanvas.enabled = true;
+    }
+
+    public void GoBackToLogin()
+    {
+        _registrationCanvas.enabled = false;
+        _loginCanvas.enabled = true;
+    }
+
+    public void SetRegUserName(String userName)
+    {
+        _regUserName = userName;
+    }
+
+    public void SetRegEmail(string email)
+    {
+        _regEmail = email;
+    }
+
+    public void SetRegPassword(string password)
+    {
+        if(_passwordField != null &&
+            _confirmPasswordField != null &&
+            _passwordField.text.Length > 0 &&
+            _passwordField.text == _confirmPasswordField.text)
+        {
+            _regPassword = password;
+            Debug.Log("Password set: " + _regPassword);
+        }
+        else
+        {
+            _regerrorLabel.enabled = true;
+            
+        }
     }
 
     public void Login()
     {
         if(!IsValideUserEmail()) 
         {
-            
-            Debug.Log("NOTVAILD" + _useremail);
             return;
         }
-        Debug.Log("email Valid");
-
         LoginWithEmailID();
     }
 
+    public void Registration()
+    {
+        RegisterUser();
+    }    
 
     #endregion
 }
