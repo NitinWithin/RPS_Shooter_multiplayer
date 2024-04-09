@@ -31,20 +31,7 @@ public class PlayerLogin : MonoBehaviour
         PhotonNetwork.AutomaticallySyncScene = true;
         _errorLabel.enabled = false;
         _regerrorLabel.enabled = false;
-        //_registrationCanvas.enabled = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _registrationCanvas.enabled = false;
     }
 
     #endregion
