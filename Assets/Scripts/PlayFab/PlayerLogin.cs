@@ -4,14 +4,18 @@ using PlayFab.ClientModels;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerLogin : MonoBehaviour
 {
     #region Variables
+    private Color _originalColor;
+    private String _originalText;
 
-     private string _loginuseremail;
-     private string _loginpassword;
+    private string _loginuseremail;
+    private string _loginpassword;
 
     private string _regUserName;
     private string _regPassword;
@@ -29,6 +33,8 @@ public class PlayerLogin : MonoBehaviour
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        _originalColor = _errorLabel.color;
+        _originalText = _errorLabel.text;
         _errorLabel.enabled = false;
         _regerrorLabel.enabled = false;
         _registrationCanvas.enabled = false;
@@ -36,16 +42,7 @@ public class PlayerLogin : MonoBehaviour
 
     #endregion
 
-    #region PUN Callbacks
-
-    #endregion
-
     #region Playfab Callbacks
-    private void OnGetPlayerProfileSuccess(GetPlayerProfileResult result)
-    {
-        string _username = result.PlayerProfile.DisplayName;
-        PlayerPrefs.SetString("USERNAME", _username);
-    }
 
     private void OnFailure(PlayFabError error)
     {
@@ -58,6 +55,7 @@ public class PlayerLogin : MonoBehaviour
     {
         _errorLabel.enabled = false;
         Debug.Log("Login Result : " + result);
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void OnRegistrationFailure(PlayFabError error)
@@ -68,11 +66,34 @@ public class PlayerLogin : MonoBehaviour
     private void OnRegisterationSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("Registration Success: " + result.ToString());
+        GoBackToLogin();
+
+        ShowMessage("Registration Successful", Color.green, 5f);
+        
     }
 
     #endregion
 
     #region private methods
+
+    private void ShowMessage(string message, Color color, float duration)
+    {
+        _errorLabel.text = message;
+        _errorLabel.color = color;
+
+        _errorLabel.enabled = true;
+        StartCoroutine(RevertChangesAfterDelay(duration));
+    }
+
+    private IEnumerator RevertChangesAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _errorLabel.color = _originalColor;
+        _errorLabel.text = _originalText;
+
+        _errorLabel.enabled = false;
+    }
     private bool IsValideUserEmail()
     {
         bool _isValid = false;
@@ -100,8 +121,6 @@ public class PlayerLogin : MonoBehaviour
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterationSuccess, OnRegistrationFailure);
         }
     }
-
-
 
     #endregion
 
