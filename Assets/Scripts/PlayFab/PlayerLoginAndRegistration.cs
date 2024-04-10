@@ -8,7 +8,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class PlayerLogin : MonoBehaviour
+public class PlayerLoginAndRegistration : MonoBehaviour
 {
     #region Variables
     private Color _originalColor;
@@ -54,8 +54,8 @@ public class PlayerLogin : MonoBehaviour
     private void OnLoginWithEmailIDSuccess(LoginResult result)
     {
         _errorLabel.enabled = false;
-        Debug.Log("Login Result : " + result);
-        SceneManager.LoadScene("MainMenu");
+        Debug.Log("Login Success : " + result);
+        GetPlayerDetails(_loginuseremail);
     }
 
     private void OnRegistrationFailure(PlayFabError error)
@@ -71,10 +71,30 @@ public class PlayerLogin : MonoBehaviour
         ShowMessage("Registration Successful", Color.green, 5f);
         
     }
+    private void GetAccountInfoSuccess(GetAccountInfoResult result)
+    {
+        Debug.Log("PlayerInfo Fetched: " + result.AccountInfo.Username);
+        PlayerPrefs.SetString("USERNAME", result.AccountInfo.Username);
 
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void GetAccountInfoFailure(PlayFabError error)
+    {
+        Debug.LogError("Could not find PlayerInfo");
+    }
     #endregion
 
     #region private methods
+
+    private void GetPlayerDetails(string email)
+    {
+        if (!string.IsNullOrEmpty(email))
+        {
+            var request = new GetAccountInfoRequest { Email = email };
+            PlayFabClientAPI.GetAccountInfo(request, GetAccountInfoSuccess, GetAccountInfoFailure);
+        }
+    }
 
     private void ShowMessage(string message, Color color, float duration)
     {
@@ -129,14 +149,14 @@ public class PlayerLogin : MonoBehaviour
     { 
         _loginuseremail = email;
         PlayerPrefs.SetString("USEREMAIL", _loginuseremail);
-        Debug.Log("EMAIL: " + PlayerPrefs.GetString("USEREMAIL"));
+       // Debug.Log("EMAIL: " + PlayerPrefs.GetString("USEREMAIL"));
     }
 
     public void SetPassword(string password)
     {
         _loginpassword = password;
         PlayerPrefs.SetString("USERPASS", _loginpassword);
-        Debug.Log("password: " + PlayerPrefs.GetString("USERPASS"));
+        //Debug.Log("password: " + PlayerPrefs.GetString("USERPASS"));
     }
 
     public void EnableRegistration()
@@ -169,7 +189,7 @@ public class PlayerLogin : MonoBehaviour
             _passwordField.text == _confirmPasswordField.text)
         {
             _regPassword = password;
-            Debug.Log("Password set: " + _regPassword);
+            //Debug.Log("Password set: " + _regPassword);
         }
         else
         {

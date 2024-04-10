@@ -22,18 +22,6 @@ public class PlayFabFriendController : MonoBehaviour
         UIFriend.OnRemoveFriend += HandleRemoveFriend;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         PhotonConnector.GetPhotonFriends -= HandleGetPhotonFriends;
@@ -83,7 +71,7 @@ public class PlayFabFriendController : MonoBehaviour
 
     private void OnFriendAddedSuccess(AddFriendResult result)
     {
-        Debug.Log("Friend Added: " + result.ToString());
+        //Debug.Log("Friend Added: " + result.ToString());
         GetPlayfabFriends();
     }
 
@@ -95,19 +83,19 @@ public class PlayFabFriendController : MonoBehaviour
     private void OnGetFriendListSuccess(GetFriendsListResult result)
     {
         _friends = result.Friends;
-        Debug.LogError("Got friend list: " + result.ToString());
+        //Debug.Log("Got friend list: " + result.ToString());
         OnFriendListUpdated?.Invoke(result.Friends);
     }
     private void OnRemoveFriendSuccess(RemoveFriendResult result)
     {
-        Debug.Log("Friend Removed: " + result.ToString());
+        //Debug.Log("Friend Removed: " + result.ToString());
 
         GetPlayfabFriends();
     }
 
     private void OnRemoveFriendFailure(PlayFabError error)
     {
-        throw new NotImplementedException();
+        Debug.LogError(error.ToString());
     }
 
     #endregion

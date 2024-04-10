@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginOrRegister.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/PlayGround.unity
-    guid: 3bc22b211fa86fc48ba665e6dedae1a2
+    path: Assets/Scenes/MainMenu.unity
+    guid: eacd4d18939ccb64da27b2cc90690a81
   - enabled: 1
     path: Assets/Scenes/RoomList.unity
     guid: 654bee971bf9b694dbe906ea42f277fd
+  - enabled: 1
+    path: Assets/Scenes/PlayGround.unity
+    guid: 3bc22b211fa86fc48ba665e6dedae1a2
   m_configObjects: {}
