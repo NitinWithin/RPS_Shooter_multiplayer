@@ -13,6 +13,7 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
     private void Awake()
     {
         nickName = PlayerPrefs.GetString("USERNAME");
+        UIInvite.OnRoomInviteAccept += HandleRoomInviteAccept;
     }
     private void Start()
     {
@@ -20,6 +21,13 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
 
         ConnectToPhoton();
     }
+
+    private void OnDestroy()
+    {
+        UIInvite.OnRoomInviteAccept -= HandleRoomInviteAccept;
+    }
+
+    
     #endregion
     #region Private Methods
     private void ConnectToPhoton()
@@ -29,6 +37,30 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = nickName;
         PhotonNetwork.ConnectUsingSettings();
+    }
+
+    private void HandleRoomInviteAccept(string roomName)
+    {
+        PlayerPrefs.SetString("PHOTONROOM", roomName);
+        if(PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+
+        }
+        else
+        {
+            if(PhotonNetwork.InLobby)
+            {
+                JoinPlayerRoom();
+            }
+        }
+    }
+
+    private void JoinPlayerRoom()
+    {
+        string roomName = PlayerPrefs.GetString("PHOTONROOM");
+        PlayerPrefs.DeleteKey("PHOTONROOM");
+        PhotonNetwork.JoinRoom(roomName);
     }
     #endregion
     #region Photon Callbacks
@@ -45,7 +77,18 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         Debug.Log("You have connected to a Photon Lobby");
         Debug.Log("Invoking get Playfab friends");
         GetPhotonFriends?.Invoke();
+        if(PlayerPrefs.GetString("PHOTONROOM") != null)
+        {
+            JoinPlayerRoom();
+        }
+        else
+        {
+            //CreateRoom here
+        }
+
         OnLobbyJoined?.Invoke();
     }
+
+
     #endregion
 }

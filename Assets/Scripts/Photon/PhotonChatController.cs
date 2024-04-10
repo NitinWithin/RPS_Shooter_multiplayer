@@ -10,12 +10,15 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     #region Variables
     [SerializeField] private string _nickName;
     private ChatClient _chatClient;
+
+    public static Action<string, string> OnRoomInvite = delegate { };
     #endregion
 
     #region Default Unity Methods
     private void Awake()
     {
         _nickName = PlayerPrefs.GetString("USERNAME");
+        UIFriend.OnInviteFriend += HandleFriendInvite;
     }
     void Start()
     {
@@ -27,6 +30,11 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     void Update()
     {
         _chatClient.Service();
+    }
+
+    private void OnDestroy()
+    {
+        UIFriend.OnInviteFriend -= HandleFriendInvite;
     }
     #endregion
 
@@ -44,10 +52,10 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     #endregion
 
     #region Public methods
-    public void SendDirectMessage(string recipient, string message)
+    public void HandleFriendInvite(string recipient)
     {
-        Debug.Log("sending message: " + recipient + " with message: " + message);
-        _chatClient.SendPrivateMessage(recipient, message);
+        Debug.Log("sending message: " + recipient);
+        _chatClient.SendPrivateMessage(recipient, PhotonNetwork.CurrentRoom.Name);
     }
     #endregion
 
@@ -65,7 +73,7 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     public void OnConnected()
     {
         Debug.Log("Connected to Photon Chat");
-        SendDirectMessage("NitinWithin", "YO!!");
+        
     }
 
     public void OnChatStateChange(ChatState state)
@@ -89,6 +97,7 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
             if(!sender.Equals(senderName, StringComparison.OrdinalIgnoreCase))
             {
                 Debug.Log("Sender : " + sender + " Message: " + message.ToString());
+                OnRoomInvite?.Invoke(sender,message.ToString());
             }
         
         }
