@@ -12,6 +12,8 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     private ChatClient _chatClient;
 
     public static Action<string, string> OnRoomInvite = delegate { };
+    public static Action<ChatClient> OnChatConnected = delegate { };
+    public static Action<PhotonStatus> OnStatusUpdated = delegate { };
     #endregion
 
     #region Default Unity Methods
@@ -68,11 +70,14 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     public void OnDisconnected()
     {
         Debug.LogError("Connection FAILED to Photon Chat");
+        _chatClient.SetOnlineStatus(ChatUserStatus.Offline);
     }
 
     public void OnConnected()
     {
         Debug.Log("Connected to Photon Chat");
+        OnChatConnected?.Invoke(_chatClient);
+        _chatClient.SetOnlineStatus(ChatUserStatus.Online);
         
     }
 
@@ -119,7 +124,8 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
-        
+        PhotonStatus newStatus = new PhotonStatus(user, status, message.ToString());
+        OnStatusUpdated?.Invoke(newStatus);
     }
 
     public void OnUserSubscribed(string channel, string user)
