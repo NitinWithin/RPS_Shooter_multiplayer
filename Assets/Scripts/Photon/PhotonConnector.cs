@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Linq;
 
 public class PhotonConnector : MonoBehaviourPunCallbacks
 {
@@ -13,20 +14,11 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
     private void Awake()
     {
         nickName = PlayerPrefs.GetString("USERNAME");
-        UIInvite.OnRoomInviteAccept += HandleRoomInviteAccept;
     }
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady || PhotonNetwork.IsConnected) return;
-
         ConnectToPhoton();
     }
-
-    private void OnDestroy()
-    {
-        UIInvite.OnRoomInviteAccept -= HandleRoomInviteAccept;
-    }
-
     
     #endregion
     #region Private Methods
@@ -39,29 +31,6 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    private void HandleRoomInviteAccept(string roomName)
-    {
-        PlayerPrefs.SetString("PHOTONROOM", roomName);
-        if(PhotonNetwork.InRoom)
-        {
-            PhotonNetwork.LeaveRoom();
-
-        }
-        else
-        {
-            if(PhotonNetwork.InLobby)
-            {
-                JoinPlayerRoom();
-            }
-        }
-    }
-
-    private void JoinPlayerRoom()
-    {
-        string roomName = PlayerPrefs.GetString("PHOTONROOM");
-        PlayerPrefs.DeleteKey("PHOTONROOM");
-        PhotonNetwork.JoinRoom(roomName);
-    }
     #endregion
     #region Photon Callbacks
     public override void OnConnectedToMaster()
@@ -77,18 +46,8 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         Debug.Log("You have connected to a Photon Lobby");
         Debug.Log("Invoking get Playfab friends");
         GetPhotonFriends?.Invoke();
-        if(PlayerPrefs.GetString("PHOTONROOM") != null)
-        {
-            JoinPlayerRoom();
-        }
-        else
-        {
-            //CreateRoom here
-        }
-
         OnLobbyJoined?.Invoke();
     }
-
 
     #endregion
 }

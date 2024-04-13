@@ -13,6 +13,8 @@ public class UIFriend : MonoBehaviour
     [SerializeField] private TMP_Text _friendNameText;
     [SerializeField] private FriendInfo _friend;
     [SerializeField] private Image _onlineImage;
+    [SerializeField] private GameObject _inviteButton;
+    private bool _isOnline;
     private Color _onlineColor = Color.green;
     private Color _offlineColor = Color.grey;
     private string _friendName;
@@ -20,6 +22,7 @@ public class UIFriend : MonoBehaviour
     public static Action<string> OnRemoveFriend = delegate { };
     public static Action<string> OnInviteFriend = delegate { };
     public static Action<string> OnGetCurrentStatus = delegate { };
+    public static Action OnGetRoomStatus = delegate { };
     #endregion
 
     #region Default Unity Methods
@@ -28,24 +31,33 @@ public class UIFriend : MonoBehaviour
     {
         PhotonChatController.OnStatusUpdated += HandleStatusUpdate;
         PhotonChatFriendController.OnStatusUpdated += HandleStatusUpdate;
+        PhotonRoomController.OnRoomStatusChange += HandleRoomStatusChange;
     }
 
     private void OnDestroy()
     {
         PhotonChatController.OnStatusUpdated -= HandleStatusUpdate;
         PhotonChatFriendController.OnStatusUpdated -= HandleStatusUpdate;
+        PhotonRoomController.OnRoomStatusChange -= HandleRoomStatusChange;
     }
     private void OnEnable()
     {
         if(!string.IsNullOrEmpty(_friendName))
         {
             OnGetCurrentStatus?.Invoke(_friendName);
+            OnGetRoomStatus?.Invoke();
         }
     }
 
     #endregion
 
     #region private methods
+
+    private void HandleRoomStatusChange(bool inRoom)
+    {
+        _inviteButton.SetActive(inRoom && _isOnline);
+    }
+
     private void HandleStatusUpdate(PhotonStatus status)
     {
         if(string.Compare(_friendName,status.PlayerName) == 0)
@@ -60,13 +72,9 @@ public class UIFriend : MonoBehaviour
     public void Initialize(string _friendName)
     {
         this._friendName = _friendName;
-        _friendNameText.SetText(this._friend.UserId);
+        _friendNameText.SetText(_friendName);
+        _inviteButton.SetActive(false);
         OnGetCurrentStatus?.Invoke(_friendName);
-    }
-    public void Initialize(FriendInfo friend)
-    {
-        _friendNameText.SetText(this._friend.UserId);
-
     }
 
     public void PlayerStatus(int status)
@@ -74,10 +82,14 @@ public class UIFriend : MonoBehaviour
         if(status == ChatUserStatus.Online)
         {
             _onlineImage.color = _onlineColor;
+            _isOnline = true;
+            OnGetRoomStatus?.Invoke();
         }
         else
         {
-            _onlineImage.color = _offlineColor; 
+            _onlineImage.color = _offlineColor;
+            _isOnline = false;
+            _inviteButton?.SetActive(false);
         }
     }
     public void RemoveFriend()
@@ -87,8 +99,8 @@ public class UIFriend : MonoBehaviour
 
     public void InviteFriend()
     {
-        Debug.Log("CLICK TO INVITE : " + _friend.UserId);
-        OnInviteFriend?.Invoke(_friend.UserId);
+        Debug.Log("CLICK TO INVITE : " + _friendName);
+        OnInviteFriend?.Invoke(_friendName);
     }
     #endregion
 }

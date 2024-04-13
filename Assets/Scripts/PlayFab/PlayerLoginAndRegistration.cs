@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 
 public class PlayerLoginAndRegistration : MonoBehaviour
@@ -46,9 +47,10 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     private void OnFailure(PlayFabError error)
     {
-        _errorLabel.enabled = true;
-        Debug.LogError("Error: " + error.ToString());
-       
+        
+        Debug.LogError("Error: email login fail. trying username login" + error.ToString());
+
+       // LoginWithUserName();
     }
 
     private void OnLoginWithEmailIDSuccess(LoginResult result)
@@ -83,6 +85,19 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     {
         Debug.LogError("Could not find PlayerInfo");
     }
+
+    private void OnUserNameLoginFailure(PlayFabError error)
+    {
+        _errorLabel.enabled = true;
+        Debug.Log("UserName Login failed: " + error.ToString());
+    }
+
+    private void OnLoginwithUserNameSuccess(LoginResult result)
+    {
+        Debug.Log("UserName Login success: " + result.PlayFabId);
+        GetPlayerDetails(_loginuseremail);
+    }
+
     #endregion
 
     #region private methods
@@ -91,8 +106,16 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(email))
         {
-            var request = new GetAccountInfoRequest { Email = email };
-            PlayFabClientAPI.GetAccountInfo(request, GetAccountInfoSuccess, GetAccountInfoFailure);
+            if (IsValideUserEmail())
+            {
+                var request = new GetAccountInfoRequest { Email = email };
+                PlayFabClientAPI.GetAccountInfo(request, GetAccountInfoSuccess, GetAccountInfoFailure);
+            }
+            else
+            {
+                var request = new GetAccountInfoRequest { Username = email };
+                PlayFabClientAPI.GetAccountInfo(request, GetAccountInfoSuccess, GetAccountInfoFailure);
+            }
         }
     }
 
@@ -116,18 +139,22 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     }
     private bool IsValideUserEmail()
     {
-        bool _isValid = false;
-        if(_loginuseremail.Length > 0) 
-        {
-            _isValid = true;
-        }
-        return _isValid;
+        // Regular expression pattern for validating email addresses
+        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+        // Use Regex.IsMatch to check if the email matches the pattern
+        return Regex.IsMatch(_loginuseremail, pattern);
     }
 
     private void LoginWithEmailID()
     {
         var request = new LoginWithEmailAddressRequest { Email = _loginuseremail, Password = _loginpassword };
         PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginWithEmailIDSuccess, OnFailure);
+    }
+    private void LoginWithUserName()
+    {
+        var request = new LoginWithPlayFabRequest { Username = _loginuseremail, Password = _loginpassword };
+        PlayFabClientAPI.LoginWithPlayFab(request, OnLoginwithUserNameSuccess, OnUserNameLoginFailure);
     }
 
     private void RegisterUser()
@@ -200,11 +227,15 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     public void Login()
     {
-        if(!IsValideUserEmail()) 
+        if(IsValideUserEmail()) 
         {
-            return;
+            LoginWithEmailID(); 
         }
-        LoginWithEmailID();
+        else
+        {
+            LoginWithUserName();
+        }
+        
     }
 
     public void Registration()

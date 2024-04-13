@@ -124,6 +124,21 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
+        if(user !=  null)
+        {
+            Debug.Log("user is " + user);
+            
+        }
+        if (status != 0)
+        {
+            Debug.Log("status is " + status);
+            
+        }
+        if (message == null)
+        {
+            Debug.Log("message is null");
+            return;
+        }
         PhotonStatus newStatus = new PhotonStatus(user, status, message.ToString());
         OnStatusUpdated?.Invoke(newStatus);
     }
