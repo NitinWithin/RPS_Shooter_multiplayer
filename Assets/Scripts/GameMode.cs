@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(menuName = "Game Mode", fileName = "gameMode")]
-public class GameMode : MonoBehaviour
+public class GameMode : ScriptableObject
 {
-    [SerializeField] private String _name;
+    [SerializeField] private string _name;
     [SerializeField] private byte _maxPlayers;
     [SerializeField] private bool _hasTeams;
     [SerializeField] private int _teamSize;

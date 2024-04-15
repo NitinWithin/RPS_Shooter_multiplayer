@@ -61,6 +61,7 @@ public class UIDisplayTeam : MonoBehaviour
 
     private void HandleCreateTeams(List<PhotonTeam> teamList, GameMode mode)
     {
+        Debug.Log("Hnadle Create team called in UIDisplay team");
         foreach(PhotonTeam team in teamList)
         {
             UITeam uiTeam = Instantiate(_uiTeamPrefab, _teamContainer);

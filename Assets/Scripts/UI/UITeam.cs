@@ -27,7 +27,6 @@ public class UITeam : MonoBehaviour
     {
         _team = team;
         _maxTeamSize = teamSize;
-        _teamSize = teamSize; 
 
         _playerSelection = new Dictionary<Player, UIPlayerSelection>();
         UpdateTeamUI();
@@ -83,6 +82,7 @@ public class UITeam : MonoBehaviour
 
     private void AddPlayerToTeam(Player player)
     {
+        Debug.Log("Adding player to team: " + player.NickName);
         UIPlayerSelection uiPlayerSelection = Instantiate(_playerSelectionPrefab, _playerSelectionContainer);
         uiPlayerSelection.Initialize(player);
         _playerSelection.Add(player,uiPlayerSelection);
@@ -108,7 +108,7 @@ public class UITeam : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("Switching Team");
         OnSwitchToTeam?.Invoke(_team);
     }
     #endregion

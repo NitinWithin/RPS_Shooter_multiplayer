@@ -12,6 +12,7 @@ public class UIDisplayRoom : MonoBehaviour
     [SerializeField] private GameObject[] _hideObjects;
     [SerializeField] private GameObject[] _showObjects; 
 
+    public static Action OnStartGame = delegate { };
     public static Action OnLeaveRoom = delegate { };
     #endregion
 
@@ -63,6 +64,12 @@ public class UIDisplayRoom : MonoBehaviour
     public void LeaveRoom()
     {
         OnLeaveRoom?.Invoke();
+    }
+
+    public void StartGame()
+    {
+        Debug.Log($"Starting game...");
+        OnStartGame?.Invoke();
     }
     #endregion
 

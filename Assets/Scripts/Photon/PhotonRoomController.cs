@@ -10,14 +10,22 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
 {
     #region Variables
     
-    private GameMode _selectedGameMode;
-    private GameMode[] _availableGameModes;
+    [SerializeField] private GameMode _selectedGameMode;
+    [SerializeField] private GameMode[] _availableGameModes;
+    [SerializeField] private bool _startGame;
+    [SerializeField] private float _currentCountDown;
+    [SerializeField] private int _gameSceneIndex;
+
     private const string GAME_MODE = "GAMEMODE";
+    private const string START_GAME = "STARTGAME";
+    private const float GAME_COUNT_DOWN = 10f;
 
     public static Action<GameMode> OnJoinRoom = delegate { };
     public static Action<bool> OnRoomStatusChange = delegate { };
     public static Action OnRoomLeft = delegate { };
     public static Action<Player> OnOtherPlayerLeftRoom = delegate { };
+    public static Action<Player> OnMasterOfRoom = delegate { };
+    public static Action<float> OnCountingDown = delegate { };
 
     #endregion
 
@@ -29,7 +37,27 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         UIInvite.OnRoomInviteAccept += HandleRoomInviteAccept;
         PhotonConnector.OnLobbyJoined += HandleLobbyJoined;
         UIDisplayRoom.OnLeaveRoom += HandleLeaveRoom;
+        UIDisplayRoom.OnStartGame += HandleGameStart;
         UIFriend.OnGetRoomStatus += HandleGetRoomStatus;
+        UIPlayerSelection.OnKickPlayer += HandleKickPlayer;
+    }
+
+    private void Update()
+    {
+        if (!_startGame) return;
+
+        if (_currentCountDown > 0)
+        {
+            OnCountingDown?.Invoke(_currentCountDown);
+            _currentCountDown -= Time.deltaTime;
+        }
+        else
+        {
+            _startGame = false;
+
+            Debug.Log("Loading level!");
+            PhotonNetwork.LoadLevel(_gameSceneIndex);
+        }
     }
 
     private void OnDestroy()
@@ -38,13 +66,29 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         UIInvite.OnRoomInviteAccept -= HandleRoomInviteAccept;
         PhotonConnector.OnLobbyJoined -= HandleLobbyJoined;
         UIDisplayRoom.OnLeaveRoom -= HandleLeaveRoom;
+        UIDisplayRoom.OnStartGame -= HandleGameStart;
         UIFriend.OnGetRoomStatus -= HandleGetRoomStatus;
+        UIPlayerSelection.OnKickPlayer -= HandleKickPlayer;
     }
-
 
     #endregion
 
     #region Private Methods
+
+    private void HandleKickPlayer(Player kickedplayer)
+    {
+        if(PhotonNetwork.LocalPlayer.Equals(kickedplayer))
+        { 
+            HandleLeaveRoom(); 
+        }
+    }
+
+    private void HandleGameStart()
+    {
+        Hashtable startRoomProperty = new Hashtable()
+            { {START_GAME, true} };
+        PhotonNetwork.CurrentRoom.SetCustomProperties(startRoomProperty);
+    }
 
     private void HandleGameModeSelected(GameMode gameMode)
     {
@@ -73,7 +117,8 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
     private void HandleLobbyJoined()
     {
         string roomName = PlayerPrefs.GetString("PHOTONROOM");
-        if(roomName.Count() <= 0)
+        Debug.Log($"Lobby joined. RoomName: {roomName}");
+        if(roomName.Count() > 0)
         {
             PhotonNetwork.JoinRoom(roomName);
             PlayerPrefs.SetString("PHOTONROOM", null);
@@ -94,9 +139,22 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         OnRoomStatusChange?.Invoke(PhotonNetwork.InRoom);
     }
 
-    private void HandleRoomInviteAccept(string obj)
+    private void HandleRoomInviteAccept(string roomName)
     {
-        
+        PlayerPrefs.SetString("PHOTONROOM", roomName);
+        if(PhotonNetwork.InRoom)
+        {
+            OnRoomLeft?.Invoke();
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            if(PhotonNetwork.InLobby)
+            {
+                PhotonNetwork.JoinRoom(roomName);
+                PlayerPrefs.SetString("PHOTONROOM", null);
+            }
+        }
     }
 
     private void DebugPlayerList()
@@ -152,10 +210,6 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
 
     #endregion
 
-    #region Public methods
-
-    #endregion
-
     #region PUN callbacks
     public override void OnCreatedRoom()
     {
@@ -166,7 +220,7 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Photon: Room joined. name: " + PhotonNetwork.CurrentRoom.Name);
         DebugPlayerList();
-
+        
         _selectedGameMode = GetRoomGameMode();
         OnJoinRoom?.Invoke(_selectedGameMode);
         OnRoomStatusChange?.Invoke(PhotonNetwork.InRoom);
@@ -201,9 +255,31 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         Debug.Log("Player left room: " +  otherPlayer.NickName);
         OnOtherPlayerLeftRoom?.Invoke(otherPlayer);
     }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        Debug.Log($"New Master Client is {newMasterClient.NickName}");
+        OnMasterOfRoom?.Invoke(newMasterClient);
+    }
+
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
+        object startGameObject;
+        if (propertiesThatChanged.TryGetValue(START_GAME, out startGameObject))
+        {
+            _startGame = (bool)startGameObject;
+            if (_startGame)
+            {
+                _currentCountDown = GAME_COUNT_DOWN;
+            }
+            if (_startGame && PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+    }
+
     #endregion
 
-    #region Playfab callbacks
-
-    #endregion
 }
