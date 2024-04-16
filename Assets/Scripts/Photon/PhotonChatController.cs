@@ -57,6 +57,7 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
     public void HandleFriendInvite(string recipient)
     {
         Debug.Log("sending message: " + recipient);
+
         _chatClient.SendPrivateMessage(recipient, PhotonNetwork.CurrentRoom.Name);
     }
     #endregion
@@ -136,10 +137,10 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
         }
         if (message == null)
         {
-            Debug.Log("message is null");
-            return;
+            Debug.Log("message is null : ");
+            //return;
         }
-        PhotonStatus newStatus = new PhotonStatus(user, status, message.ToString());
+        PhotonStatus newStatus = new PhotonStatus(user, status, "Dummy STRING");
         OnStatusUpdated?.Invoke(newStatus);
     }
 

@@ -82,6 +82,7 @@ public class PhotonChatFriendController : MonoBehaviour
         {
             status = new PhotonStatus(friendName, 0, "");
         }
+        OnStatusUpdated?.Invoke(status);
     }
 
     private void FindPhotonFriends()
@@ -111,18 +112,6 @@ public class PhotonChatFriendController : MonoBehaviour
             OnDisplayFriends?.Invoke(_friendList);
         }
     }
-
-    #endregion
-
-    #region Public methods
-
-    #endregion
-
-    #region PUN callbacks
-
-    #endregion
-
-    #region Playfab callbacks
 
     #endregion
 }

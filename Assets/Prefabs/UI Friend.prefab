@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _friendNameText: {fileID: 3551620323033749725}
   _onlineImage: {fileID: 5774608802146829165}
+  _inviteButton: {fileID: 1660498341521399485}
 --- !u!1 &1660498341521399485
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class PhotonStatus : MonoBehaviour
-{
+[Serializable]
+public class PhotonStatus
+{ 
     #region Public Methods
     public string PlayerName { get; private set; }
     public int Status {  get; private set; }

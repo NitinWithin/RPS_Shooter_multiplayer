@@ -60,6 +60,7 @@ public class UIFriend : MonoBehaviour
 
     private void HandleStatusUpdate(PhotonStatus status)
     {
+        Debug.Log("HANDLE STATUS UPDATE: " + status.PlayerName + " status: " + status.Status);
         if(string.Compare(_friendName,status.PlayerName) == 0)
         {
             PlayerStatus(status.Status);
@@ -79,6 +80,8 @@ public class UIFriend : MonoBehaviour
 
     public void PlayerStatus(int status)
     {
+        Debug.Log("Player status : " + status);
+        Debug.Log("Chat Online status: " + ChatUserStatus.Online);
         if(status == ChatUserStatus.Online)
         {
             _onlineImage.color = _onlineColor;
