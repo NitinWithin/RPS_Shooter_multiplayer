@@ -415,6 +415,18 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.Identity.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
@@ -451,8 +463,20 @@
       <HintPath>Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging">
+      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Logging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
@@ -1077,6 +1101,10 @@
       <Project>{E4E02AC1-9640-96DF-BA26-4C64CA6F9AAD}</Project>
       <Name>PunDemos.DemoSlotcarEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFabEditorExtensions.csproj">
+      <Project>{D955D1AB-7EEF-C24A-6426-C6AC76736CAD}</Project>
+      <Name>PlayFabEditorExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="PhotonRealtime.csproj">
       <Project>{74B821D8-D0EA-1949-690C-E34541D0BD68}</Project>
       <Name>PhotonRealtime</Name>
@@ -1085,6 +1113,10 @@
       <Project>{F4513D99-0DEA-C4FC-51DD-488422550DB1}</Project>
       <Name>PhotonChat</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{1D90A9B5-CCD0-21AC-D237-481AB413FEA0}</Project>
+      <Name>PlayFab</Name>
+    </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.csproj">
       <Project>{C3D569A7-C6A5-B702-4DD5-BE304E887669}</Project>
       <Name>PhotonUnityNetworking</Name>
@@ -1092,6 +1124,10 @@
     <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
       <Project>{ABEB78D2-4C22-F96C-E8CC-EA81E0385D3B}</Project>
       <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{6E132A9B-7BFC-F331-FEB2-26E849E230C4}</Project>
+      <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
       <Project>{724ABE0E-8BB7-340C-0D37-507397A6258F}</Project>
