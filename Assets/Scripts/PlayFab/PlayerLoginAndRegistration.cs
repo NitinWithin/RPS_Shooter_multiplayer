@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 
 public class PlayerLoginAndRegistration : MonoBehaviour
@@ -49,14 +50,13 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     {
         
         Debug.LogError("Error: email login fail. trying username login" + error.ToString());
-
-       // LoginWithUserName();
     }
 
     private void OnLoginWithEmailIDSuccess(LoginResult result)
     {
         _errorLabel.enabled = false;
         Debug.Log("Login Success : " + result);
+        
         GetPlayerDetails(_loginuseremail);
     }
 
@@ -67,7 +67,6 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     private void OnRegisterationSuccess(RegisterPlayFabUserResult result)
     {
-        Debug.Log("Registration Success: " + result.ToString());
         GoBackToLogin();
 
         ShowMessage("Registration Successful", Color.green, 5f);
@@ -75,15 +74,15 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     }
     private void GetAccountInfoSuccess(GetAccountInfoResult result)
     {
-        Debug.Log("PlayerInfo Fetched: " + result.AccountInfo.Username);
         PlayerPrefs.SetString("USERNAME", result.AccountInfo.Username);
-
-        SceneManager.LoadScene("MainMenu");
+        PlayerPrefs.SetString("PLAYFABID", result.AccountInfo.PlayFabId);
+        CheckUserSessionID(result.AccountInfo.PlayFabId);
+        //SceneManager.LoadScene("MainMenu");
     }
 
     private void GetAccountInfoFailure(PlayFabError error)
     {
-        Debug.LogError("Could not find PlayerInfo");
+        Debug.LogError("Could not find PlayerInfo: " + error.ToString());
     }
 
     private void OnUserNameLoginFailure(PlayFabError error)
@@ -98,9 +97,64 @@ public class PlayerLoginAndRegistration : MonoBehaviour
         GetPlayerDetails(_loginuseremail);
     }
 
+    private void GetUserDataFail(PlayFabError error)
+    {
+        Debug.Log("Get User data error " + error.ToString());
+    }
+
+    private void GetUserDataSuccess(GetUserDataResult result)
+    {
+        if (result.Data.ContainsKey("CURRENTSESSIONID"))
+        {
+            var LastSessionID = result.Data["CURRENTSESSIONID"].Value;
+
+
+            if (LastSessionID == SystemInfo.deviceUniqueIdentifier)
+            {
+                Debug.Log("SessionIdMatch");
+                SceneManager.LoadScene("MainMenu");
+            }
+            else
+            {
+                ShowMessage("User Logined elsewhere. pls login out in the other device first", Color.red, 5f);
+            }
+        }
+        else
+        {
+            UpdateUserSessionID();
+        }
+    }
+
+    private void UpdateUserDataSuccess(UpdateUserDataResult result)
+    {
+        Debug.Log("UserData updated");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void UpdateUserDataFail(PlayFabError error)
+    {
+        Debug.Log("UserData update failed:  " + error.ToString());
+    }
+
     #endregion
 
     #region private methods
+
+    private void UpdateUserSessionID()
+    {
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>() { { "CURRENTSESSIONID", SystemInfo.deviceUniqueIdentifier } }
+        };
+        PlayFabClientAPI.UpdateUserData(request, UpdateUserDataSuccess, UpdateUserDataFail);
+    }
+
+
+    private void CheckUserSessionID(string PlayFabID)
+    {
+        var request = new GetUserDataRequest { PlayFabId = PlayFabID };
+        PlayFabClientAPI.GetUserData(request, GetUserDataSuccess, GetUserDataFail);
+    }
 
     private void GetPlayerDetails(string email)
     {
@@ -175,15 +229,13 @@ public class PlayerLoginAndRegistration : MonoBehaviour
     public void SetUserEmail(string email)
     { 
         _loginuseremail = email;
-        PlayerPrefs.SetString("USEREMAIL", _loginuseremail);
-       // Debug.Log("EMAIL: " + PlayerPrefs.GetString("USEREMAIL"));
+        PlayerPrefs.SetString("USEREMAIL", _loginuseremail.Trim());
     }
 
     public void SetPassword(string password)
     {
         _loginpassword = password;
-        PlayerPrefs.SetString("USERPASS", _loginpassword);
-        //Debug.Log("password: " + PlayerPrefs.GetString("USERPASS"));
+        PlayerPrefs.SetString("USERPASS", _loginpassword.Trim());
     }
 
     public void EnableRegistration()
@@ -210,19 +262,21 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     public void SetRegPassword(string password)
     {
-        if(_passwordField != null &&
-            _confirmPasswordField != null &&
-            _passwordField.text.Length > 0 &&
-            _passwordField.text == _confirmPasswordField.text)
+        if (_passwordField.text.Length <= 6)
+        {
+            ShowMessage("Password has to be more than 6 characters long", Color.red, 5f);
+        }
+        else if (_passwordField != null &&
+                    _confirmPasswordField != null &&
+                    _passwordField.text == _confirmPasswordField.text)
         {
             _regPassword = password;
-            //Debug.Log("Password set: " + _regPassword);
         }
         else
         {
             _regerrorLabel.enabled = true;
-            
         }
+
     }
 
     public void Login()

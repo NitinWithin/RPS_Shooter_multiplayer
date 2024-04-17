@@ -374,7 +374,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f55ce02f65a50f140a895961657701dd, type: 2}
   _startGame: 0
   _currentCountDown: 0
-  _gameSceneIndex: 0
+  _gameSceneIndex: 2
 --- !u!1 &69093763
 GameObject:
   m_ObjectHideFlags: 0
