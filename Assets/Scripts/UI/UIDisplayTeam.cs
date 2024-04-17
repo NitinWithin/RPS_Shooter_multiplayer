@@ -34,7 +34,6 @@ public class UIDisplayTeam : MonoBehaviour
         PhotonTeamController.OnClearTeam -= HandleClearTeam;
     }
 
-
     #endregion
 
     #region Private Methods
@@ -54,14 +53,12 @@ public class UIDisplayTeam : MonoBehaviour
 
     private void HandleSwitchTeam(Player player, PhotonTeam team)
     {
-        Debug.Log("Update UI to switch " + player.NickName + " TO " + team.Name);
         OnRemovePlayerFromTeam?.Invoke(player);
         OnAddPlayerToTeam(player, team);
     }
 
     private void HandleCreateTeams(List<PhotonTeam> teamList, GameMode mode)
     {
-        Debug.Log("Hnadle Create team called in UIDisplay team");
         foreach(PhotonTeam team in teamList)
         {
             UITeam uiTeam = Instantiate(_uiTeamPrefab, _teamContainer);
@@ -71,15 +68,4 @@ public class UIDisplayTeam : MonoBehaviour
     }
     #endregion
 
-    #region Public methods
-
-    #endregion
-
-    #region PUN callbacks
-
-    #endregion
-
-    #region Playfab callbacks
-
-    #endregion
 }

@@ -28,7 +28,6 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
         ConnectToPhotonChat();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _chatClient.Service();
@@ -70,7 +69,7 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
 
     public void OnDisconnected()
     {
-        Debug.LogError("Connection FAILED to Photon Chat");
+        Debug.LogError("Disconnected from Photon Chat");
         _chatClient.SetOnlineStatus(ChatUserStatus.Offline);
     }
 
@@ -94,7 +93,6 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
-        Debug.Log("OnPrivateMessage");
         if(!string.IsNullOrEmpty(message.ToString())) 
         {
             //Channel Name format [sender : recipient]
@@ -125,21 +123,6 @@ public class PhotonChatController : MonoBehaviour, IChatClientListener
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
-        if(user !=  null)
-        {
-            Debug.Log("user is " + user);
-            
-        }
-        if (status != 0)
-        {
-            Debug.Log("status is " + status);
-            
-        }
-        if (message == null)
-        {
-            Debug.Log("message is null : ");
-            //return;
-        }
         PhotonStatus newStatus = new PhotonStatus(user, status, "Dummy STRING");
         OnStatusUpdated?.Invoke(newStatus);
     }

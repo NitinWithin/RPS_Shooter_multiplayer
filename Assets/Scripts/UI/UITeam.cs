@@ -36,6 +36,7 @@ public class UITeam : MonoBehaviour
         {
             foreach(Player member in teamMembers)
             {
+                Debug.Log("Adding player: " + member.NickName);
                 AddPlayerToTeam(member);
             }
         }
@@ -82,7 +83,6 @@ public class UITeam : MonoBehaviour
 
     private void AddPlayerToTeam(Player player)
     {
-        Debug.Log("Adding player to team: " + player.NickName);
         UIPlayerSelection uiPlayerSelection = Instantiate(_playerSelectionPrefab, _playerSelectionContainer);
         uiPlayerSelection.Initialize(player);
         _playerSelection.Add(player,uiPlayerSelection);
@@ -108,7 +108,6 @@ public class UITeam : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Switching Team");
         OnSwitchToTeam?.Invoke(_team);
     }
     #endregion

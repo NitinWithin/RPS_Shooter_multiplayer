@@ -62,15 +62,4 @@ public class UIDisplayInvite : MonoBehaviour
     }
     #endregion
 
-    #region Public methods
-
-    #endregion
-
-    #region PUN callbacks
-
-    #endregion
-
-    #region Playfab callbacks
-
-    #endregion
 }

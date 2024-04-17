@@ -34,7 +34,6 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
     #region Default Unity Methods
     public void Initialize(Player player)
     {
-        Debug.Log("player Selection init " + player.NickName);
         _owner = player;
         _currentSelection = GetCharacterSelection();
         SetUpPlayerSelection();

@@ -1,7 +1,8 @@
-using ExitGames.Client.Photon;
+using Exitgames = ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -55,7 +56,6 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         {
             _startGame = false;
 
-            Debug.Log("Loading level!");
             PhotonNetwork.LoadLevel(_gameSceneIndex);
         }
     }
@@ -85,7 +85,7 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
 
     private void HandleGameStart()
     {
-        Hashtable startRoomProperty = new Hashtable()
+        Exitgames.Hashtable startRoomProperty = new Exitgames.Hashtable()
             { {START_GAME, true} };
         PhotonNetwork.CurrentRoom.SetCustomProperties(startRoomProperty);
     }
@@ -102,13 +102,12 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         }
 
         _selectedGameMode = gameMode;
-        Debug.Log("Joining gameMode: " + _selectedGameMode);
         JoinPhotonRoom();
     }
 
     private void JoinPhotonRoom()
     {
-        Hashtable expectedCustomRoomProperties = new Hashtable()
+        Exitgames.Hashtable expectedCustomRoomProperties = new Exitgames.Hashtable()
         { { GAME_MODE, _selectedGameMode.Name } };
 
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
@@ -117,7 +116,6 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
     private void HandleLobbyJoined()
     {
         string roomName = PlayerPrefs.GetString("PHOTONROOM");
-        Debug.Log($"Lobby joined. RoomName: {roomName}");
         if(roomName.Count() > 0)
         {
             PhotonNetwork.JoinRoom(roomName);
@@ -198,14 +196,21 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
 
         string[] roomProperties = { GAME_MODE };
 
-        Hashtable customRoomProperites = new Hashtable()
+        Exitgames.Hashtable customRoomProperites = new Exitgames.Hashtable()
         { {GAME_MODE, _selectedGameMode.Name } };
 
         options.CustomRoomPropertiesForLobby = roomProperties;
         options.CustomRoomProperties = customRoomProperites;
 
         return options;
+    }
 
+    private IEnumerator DelayNextSteps()
+    {
+        yield return new WaitForSeconds(1f);
+        _selectedGameMode = GetRoomGameMode();
+        OnJoinRoom?.Invoke(_selectedGameMode);
+        OnRoomStatusChange?.Invoke(PhotonNetwork.InRoom);
     }
 
     #endregion
@@ -220,15 +225,14 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Photon: Room joined. name: " + PhotonNetwork.CurrentRoom.Name);
         DebugPlayerList();
-        
-        _selectedGameMode = GetRoomGameMode();
-        OnJoinRoom?.Invoke(_selectedGameMode);
-        OnRoomStatusChange?.Invoke(PhotonNetwork.InRoom);
+
+        StartCoroutine(DelayNextSteps());
+
     }
 
     public override void OnLeftRoom()
     {
-        Debug.Log("Yoiu have left the room");
+        Debug.Log("You have left the room");
         _selectedGameMode = null;
         OnRoomStatusChange?.Invoke(PhotonNetwork.InRoom);
     }
@@ -262,7 +266,7 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
         OnMasterOfRoom?.Invoke(newMasterClient);
     }
 
-    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    public override void OnRoomPropertiesUpdate(Exitgames.Hashtable propertiesThatChanged)
     {
         object startGameObject;
         if (propertiesThatChanged.TryGetValue(START_GAME, out startGameObject))

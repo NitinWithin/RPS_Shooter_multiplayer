@@ -72,7 +72,6 @@ public class PhotonTeamController : MonoBehaviourPunCallbacks
 
     private void HandleCreateTeams(GameMode mode)
     {
-        Debug.Log("Heandle create team called in Team Controller");
         CreateTeams(mode);
 
         OnCreateTeams?.Invoke(_roomTeams, mode);
@@ -88,8 +87,6 @@ public class PhotonTeamController : MonoBehaviourPunCallbacks
 
             if (teamPlayerCount < gameMode.TeamSize)
             {
-                Debug.Log("auto assigning " + player.NickName + " to " + team.Code);
-                Debug.Log("GET photon team: " + player.GetPhotonTeam());
                 if (player.GetPhotonTeam() == null)
                 {
                     player.JoinTeam(team.Code);
@@ -156,8 +153,7 @@ public class PhotonTeamController : MonoBehaviourPunCallbacks
     {
         object teamCodeObject;
         if(changedProps.TryGetValue(PhotonTeamsManager.TeamPlayerProp, out teamCodeObject))
-        {
-            Debug.Log("team code for player: " + teamCodeObject);
+        { 
             if (teamCodeObject == null) 
             {
                 return;
