@@ -15,38 +15,27 @@ public class UIDisplayFriends : MonoBehaviour
 
     private void Awake()
     {
-        PhotonFriendsController.OnDisplayFriends += HandleDisplayfriends;
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        PhotonChatFriendController.OnDisplayFriends += HandleDisplayfriends;
 
     }
 
     private void OnDestroy()
     {
-        PhotonFriendsController.OnDisplayFriends -= HandleDisplayfriends;
+        PhotonChatFriendController.OnDisplayFriends -= HandleDisplayfriends;
     }
 
 
     #endregion
 
     #region Private Methods
-    private void HandleDisplayfriends(List<FriendInfo> friends)
+    private void HandleDisplayfriends(List<string> friends)
     {
         foreach(Transform child in _friendContainer)
         {
             Destroy(child.gameObject); 
         }
 
-        foreach(FriendInfo friend in friends)
+        foreach(string friend in friends)
         {
             UIFriend uifriend = Instantiate(_friendPrefab, _friendContainer);
             uifriend.Initialize(friend);

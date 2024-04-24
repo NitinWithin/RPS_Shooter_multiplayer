@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Linq;
 
 public class PhotonConnector : MonoBehaviourPunCallbacks
 {
@@ -16,10 +17,9 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady || PhotonNetwork.IsConnected) return;
-
         ConnectToPhoton();
     }
+    
     #endregion
     #region Private Methods
     private void ConnectToPhoton()
@@ -30,6 +30,7 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = nickName;
         PhotonNetwork.ConnectUsingSettings();
     }
+
     #endregion
     #region Photon Callbacks
     public override void OnConnectedToMaster()
@@ -47,5 +48,6 @@ public class PhotonConnector : MonoBehaviourPunCallbacks
         GetPhotonFriends?.Invoke();
         OnLobbyJoined?.Invoke();
     }
+
     #endregion
 }
