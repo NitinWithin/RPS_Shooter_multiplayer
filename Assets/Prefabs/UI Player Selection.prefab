@@ -318,8 +318,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -692,7 +692,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 200}
+  m_SizeDelta: {x: 140, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2544727294362602237
 MonoBehaviour:
@@ -738,9 +738,9 @@ MonoBehaviour:
   _nextButton: {fileID: 5437812284604812782}
   _kickButton: {fileID: 8555851520102510645}
   _characterSprites:
-  - {fileID: 21300000, guid: 743aae4b5553cb24eb7caf0bce1a4128, type: 3}
-  - {fileID: 21300000, guid: bfb6bd7e8471f5442bd8e524bdda3380, type: 3}
-  - {fileID: 21300000, guid: 1d1b964de9e4c50418b4d14cdf24d9ba, type: 3}
+  - {fileID: 21300000, guid: 68cb23c794bc1334ea00a1d509ae3f2e, type: 3}
+  - {fileID: 21300000, guid: b90bf80d57e76e04fa131a803e46e5fc, type: 3}
+  - {fileID: 21300000, guid: 6defd78efb8c090438e6a556e0f49cbe, type: 3}
   _currentSelection: 0
 --- !u!114 &6568885062105803327
 MonoBehaviour:
@@ -1229,7 +1229,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 153.2679, y: 79.99938}
+  m_SizeDelta: {x: 140, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5183076681703074459
 CanvasRenderer:
