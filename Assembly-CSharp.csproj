@@ -137,6 +137,7 @@
     <Compile Include="Assets\Scripts\PlayerCharacter\Damage.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
+    <Compile Include="Assets\Scripts\PlayerCharacter\CharacterSet.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonChatController.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs" />
     <Compile Include="Assets\Scripts\PlayFab\PlayFabFriendController.cs" />

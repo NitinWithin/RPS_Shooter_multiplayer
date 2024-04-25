@@ -59,7 +59,7 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
             _nextButton.SetActive(false) ;
         }
 
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             ShowMasterClientUI();
         }
@@ -73,7 +73,7 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
         }
         if(PhotonNetwork.LocalPlayer.Equals(_owner))
         {
-            _kickButton.SetActive(false );
+            _kickButton.SetActive(false);
         }
         else
         {

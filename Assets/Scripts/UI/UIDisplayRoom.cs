@@ -9,8 +9,9 @@ public class UIDisplayRoom : MonoBehaviour
     [SerializeField] private TMP_Text _roomGameModeText;
     [SerializeField] private GameObject _exitButton;
     [SerializeField] private GameObject _roomContainer;
+    [SerializeField] private GameObject _startGameButton;
     [SerializeField] private GameObject[] _hideObjects;
-    [SerializeField] private GameObject[] _showObjects; 
+    [SerializeField] private GameObject[] _showObjects;
 
     public static Action OnStartGame = delegate { };
     public static Action OnLeaveRoom = delegate { };
@@ -21,6 +22,11 @@ public class UIDisplayRoom : MonoBehaviour
     {
         PhotonRoomController.OnJoinRoom += HandleOnJoinRoom;
         PhotonRoomController.OnRoomLeft += HandleOnRoomLeft;
+    }
+
+    private void Start()
+    {
+       
     }
 
     private void OnDestroy()
@@ -39,7 +45,18 @@ public class UIDisplayRoom : MonoBehaviour
         _exitButton.SetActive(true);
         _roomContainer.SetActive(true);
 
-        foreach(GameObject go in _hideObjects)
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            Debug.Log("MAsterClient");
+            _startGameButton.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("NOT MAsterClient");
+            _startGameButton.SetActive(false);
+        }
+
+        foreach (GameObject go in _hideObjects)
         {
             go.SetActive(false);
         }

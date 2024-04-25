@@ -1,7 +1,6 @@
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -83,6 +82,15 @@ public class UITeam : MonoBehaviour
 
     private void AddPlayerToTeam(Player player)
     {
+        if(_playerSelectionPrefab == null) 
+        {
+            Debug.LogError("_playerSelectionPrefab is null");
+            return;
+        }
+        if(_playerSelectionContainer == null)
+        {
+            Debug.Log("_playerSelectionContainer is null");
+        }
         UIPlayerSelection uiPlayerSelection = Instantiate(_playerSelectionPrefab, _playerSelectionContainer);
         uiPlayerSelection.Initialize(player);
         _playerSelection.Add(player,uiPlayerSelection);

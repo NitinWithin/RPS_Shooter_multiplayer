@@ -350,6 +350,7 @@ MonoBehaviour:
   _roomGameModeText: {fileID: 1771097662}
   _exitButton: {fileID: 69093763}
   _roomContainer: {fileID: 1996177750}
+  _startGameButton: {fileID: 1924900629}
   _hideObjects:
   - {fileID: 1518143319}
   - {fileID: 813457677}

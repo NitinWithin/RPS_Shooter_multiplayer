@@ -866,14 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32cf437d4aa7a748aadb73e497c41a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _teamPanel: {fileID: 1731226274}
-  _CharacterPanel: {fileID: 939100509}
-  _gameUI: {fileID: 645215486}
-  _redButton: {fileID: 1505763602}
-  _blueButton: {fileID: 2122634787}
-  _rockButton: {fileID: 1802813137}
-  _paperButton: {fileID: 1402417417}
-  _scissorsButton: {fileID: 189330439}
 --- !u!4 &645215488
 Transform:
   m_ObjectHideFlags: 0
