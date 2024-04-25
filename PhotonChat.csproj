@@ -60,23 +60,23 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.18f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatOperationCode.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatState.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatClient.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatEventCode.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatUserStatus.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\IChatClientListener.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatDisconnectCause.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatPeer.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChannelCreationOptions.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatAppSettings.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChannelWellKnownProperties.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatParameterCode.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Code\ChatChannel.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatParameterCode.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatState.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatDisconnectCause.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatClient.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatPeer.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatChannel.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\IChatClientListener.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChannelCreationOptions.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatEventCode.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatOperationCode.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChannelWellKnownProperties.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatUserStatus.cs" />
+    <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Code\ChatAppSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Photon\PhotonChat\Code\changes-chat.txt" />
-    <None Include="Assets\Photon\PhotonChat\Code\PhotonChat.asmdef" />
+    <None Include="Assets\NetworkAssets\Photon\PhotonChat\Code\changes-chat.txt" />
+    <None Include="Assets\NetworkAssets\Photon\PhotonChat\Code\PhotonChat.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -428,15 +428,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.IdentityModel.Tokens.Jwt">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Identity.Client">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.Identity.Client.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.Identity.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
@@ -452,7 +452,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
@@ -472,11 +472,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Tokens.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
@@ -484,11 +484,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Logging">
-      <HintPath>Assets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Logging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
