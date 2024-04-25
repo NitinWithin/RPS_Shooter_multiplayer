@@ -430,18 +430,6 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.IdentityModel.Tokens.Jwt">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Identity.Client">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.Identity.Client.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
@@ -478,20 +466,8 @@
       <HintPath>Assets\NetworkAssets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Tokens.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.JsonWebTokens">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Logging">
-      <HintPath>Assets\NetworkAssets\PlayFabEditorExtensions\Editor\Resources\Microsoft.IdentityModel.Logging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">

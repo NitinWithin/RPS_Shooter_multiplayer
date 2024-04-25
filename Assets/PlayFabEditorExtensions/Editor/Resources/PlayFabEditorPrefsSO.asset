@@ -17,7 +17,7 @@ MonoBehaviour:
   AadAuthorization: 
   SelectedStudio: 
   SdkPath: 
-  EdExPath: C:/UnityProjects/MultiPLayer_PFS_demo/Assets\NetworkAssets\PlayFabEditorExtensions\Editor
+  EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
   curMainMenuIdx: 0

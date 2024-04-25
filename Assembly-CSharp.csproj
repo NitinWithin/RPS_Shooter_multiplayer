@@ -75,6 +75,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\UI\UIAddFriend.cs" />
+    <Compile Include="Assets\Scripts\PlayFab\PlayerLogin.cs" />
     <Compile Include="Assets\Scripts\UI\UIDisplayTeam.cs" />
     <Compile Include="Assets\Scripts\LoadLobbyPage.cs" />
     <Compile Include="Assets\Scripts\UI\UITeam.cs" />
@@ -99,11 +100,11 @@
     <Compile Include="Assets\Scripts\UI\UIDisplayFriends.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
-    <Compile Include="Assets\Scripts\player.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\TestScipts\player.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\CrossHairController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonRoomController.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\Photon\PhotonFriendsController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\FireWeapon.cs" />
     <Compile Include="Assets\Scripts\PopulateRoomList.cs" />
     <Compile Include="Assets\Scripts\UI\UIInvite.cs" />
