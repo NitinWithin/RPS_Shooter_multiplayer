@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d68d11c12b473e74da477583b8fc472e, type: 3}
+  m_Script: {fileID: 11500000, guid: fb3eaf25f9157c545a017157debea243, type: 3}
   m_Name: TDM
   m_EditorClassIdentifier: 
   _name: Team Death Match
