@@ -36,8 +36,9 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
     {
         _owner = player;
         _currentSelection = GetCharacterSelection();
+        Debug.Log("Current Selction " + _currentSelection);
         SetUpPlayerSelection();
-        UpdateCharacterModel(_currentSelection);
+        UpdateCharacterSelection(_currentSelection);
     }
     #endregion
 

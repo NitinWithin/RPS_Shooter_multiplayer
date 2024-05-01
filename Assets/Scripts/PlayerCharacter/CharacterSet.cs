@@ -1,4 +1,5 @@
 using Photon.Pun;
+using PlayFab.Internal;
 using UnityEngine;
 
 public class CharacterSet : MonoBehaviour
@@ -24,7 +25,6 @@ public class CharacterSet : MonoBehaviour
     {
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            Debug.LogWarning("player Nick name : " + player.NickName);
             if(player.IsLocal && player.CustomProperties.ContainsKey("CSN"))
             {
                 Debug.LogWarning("player CSN: " + (int)player.CustomProperties["CSN"]);

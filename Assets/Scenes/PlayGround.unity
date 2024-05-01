@@ -152,7 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7b196276da77f41acca79503c5e628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 2766568815406086306, guid: 4e23398fc535e5b4e954fe2f1188ca3c, type: 3}
+  _TeamAplayerPrefab:
+  - {fileID: 2766568815406086306, guid: 0a258fdcd5acc3b4bae5e9a22ac82820, type: 3}
+  - {fileID: 2766568815406086306, guid: 244ec38e3d566e94586b388f46cec559, type: 3}
+  - {fileID: 2766568815406086306, guid: 6e816c8f0bf5a8c4582e704365e85ff2, type: 3}
+  _TeamBplayerPrefab:
+  - {fileID: 2766568815406086306, guid: 4f8cd6e924549c346a14f44a0dc64529, type: 3}
+  - {fileID: 2766568815406086306, guid: 994f77f0ec4107d4c98a9b8f2527c84c, type: 3}
+  - {fileID: 2766568815406086306, guid: 85bce78bf3fdd484e9f39e5efc981c45, type: 3}
   delayInSeconds: 1
 --- !u!4 &187685512
 Transform:
