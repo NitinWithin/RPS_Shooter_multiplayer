@@ -55,15 +55,15 @@ public class ProjectileMover : MonoBehaviour
                
             }
         }
-        else if (collision.gameObject.CompareTag("freeze"))
-        {
-            move moveScript = collision.gameObject.GetComponent<move>();
-            if (moveScript != null)
-            {
-                moveScript.moveSpeed = 0f;
-            }
+        //else if (collision.gameObject.CompareTag("freeze"))
+        //{
+           // move moveScript = collision.gameObject.GetComponent<move>();
+            //if (moveScript != null)
+            //{
+                //moveScript.moveSpeed = 0f;
+            //}
 
-        }
+        //}
         //Lock all axes movement and rotation
         rb.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;
