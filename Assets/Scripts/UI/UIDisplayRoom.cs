@@ -24,11 +24,6 @@ public class UIDisplayRoom : MonoBehaviour
         PhotonRoomController.OnRoomLeft += HandleOnRoomLeft;
     }
 
-    private void Start()
-    {
-       
-    }
-
     private void OnDestroy()
     {
         PhotonRoomController.OnJoinRoom -= HandleOnJoinRoom;
@@ -47,12 +42,10 @@ public class UIDisplayRoom : MonoBehaviour
 
         if (PhotonNetwork.LocalPlayer.IsMasterClient)
         {
-            Debug.Log("MAsterClient");
             _startGameButton.SetActive(true);
         }
         else
         {
-            Debug.Log("NOT MAsterClient");
             _startGameButton.SetActive(false);
         }
 

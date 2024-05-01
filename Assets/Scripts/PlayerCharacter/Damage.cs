@@ -1,17 +1,15 @@
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 
 public class Damage : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Variables
-
+    [SerializeField] TMP_Text _healthText;
     [SerializeField] private int _health = 100;
     private Renderer[] _visuals;
     #endregion
-
 
     #region Default Methods 
     // Start is called before the first frame update
@@ -51,7 +49,7 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
         VisualizeRenderer(false); 
         _health = 100;
         GetComponent<CharacterController>().enabled = false;
-        transform.position = new Vector3(0,10,0);
+        transform.position = new Vector3(0,5,0);
         yield return new WaitForSeconds(1f);
         GetComponent<CharacterController>().enabled = true;
         VisualizeRenderer(true);
@@ -71,6 +69,7 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     public void DoDamage(int damage)
     {
         _health -= damage;
+        _healthText.text = _health.ToString();
     }
     #endregion
 }

@@ -1,4 +1,6 @@
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +17,14 @@ public class FireWeapon : MonoBehaviourPunCallbacks
     private bool isStunned = false;
     private float stunDuration = 2f;
 
-    Dictionary<string, string> counters = new Dictionary<string, string>()
+    public static Action<int> OnDamageTaken = delegate {  };
+
+    // Rock = 0; Paper = 1; Scissors = 2
+    Dictionary<int, int> counters = new Dictionary<int, int>()
         {
-            { "scissors", "paper" },
-            { "paper", "rock" },
-            { "rock", "scissors" }
+            { 2, 1 },
+            { 1, 0 },
+            { 0, 2 }
         };
     #endregion
 
@@ -69,44 +74,43 @@ public class FireWeapon : MonoBehaviourPunCallbacks
         isStunned = false;
     }
 
-
     private void WeaponAim()
     {
-        // Get the position of the mouse cursor in screen space
         Vector3 mouseCursorPosition = Input.mousePosition;
         mouseCursorPosition.z = 15f;
 
-        // Convert the mouse cursor position from screen space to world space
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mouseCursorPosition);
 
-        // Make the gun's forward direction point towards the cursor position
         _lasergun.LookAt(targetPosition);
     }
 
     public void ApplyRPSLogic(GameObject _enemyPlayer)
     {
-        _enemyPlayer.GetComponent<Damage>().DoDamage(20);
-        // TODO: Change this to use PHOTON TEAMS
+        Player enemyPlayer = _enemyPlayer.GetPhotonView().GetComponent<Player>();
+        int enemyCharacter = (int)_enemyPlayer.GetPhotonView().GetComponent<Player>().CustomProperties["CSN"];
+        int playerCharacter = (int)PhotonNetwork.LocalPlayer.CustomProperties["CSN"];
 
-       /* if (_enemyPlayer.layer == photonView.gameObject.layer) // When in the same team
+        if (enemyPlayer.GetPhotonTeam().Code == PhotonNetwork.LocalPlayer.GetPhotonTeam().Code) // When in the same team
         {
             _enemyPlayer.GetComponent<Damage>().DoDamage(5);
+            OnDamageTaken?.Invoke(5);
         }
-        else if(_enemyTag == _playerTag) // Same type
+        else if(enemyCharacter == playerCharacter) // Same type
         {
             PushPlayersBack(_player.transform, _enemyPlayer.transform);
         }
         else
         {
-            if (counters.ContainsKey(_playerTag) && counters[_playerTag] == _enemyTag) // Nemeis
+            if (counters.ContainsKey(playerCharacter) && counters[playerCharacter] == enemyCharacter) // Nemeis
             {
+                OnDamageTaken?.Invoke(20);
                 _enemyPlayer.GetComponent<Damage>().DoDamage(20);
             }
             else
             {
                 StunPlayer(_enemyPlayer);
             }
-        }*/
+        }
 
     }
 
@@ -141,12 +145,12 @@ public class FireWeapon : MonoBehaviourPunCallbacks
         Ray ray = new Ray(_lasergun.position, _lasergun.forward);
         if(Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            var _enemyPlayerHealth = hit.collider.gameObject;
+            var _enemyPlayer = hit.collider.gameObject;
 
-            if(_enemyPlayerHealth)
+            if(_enemyPlayer && _enemyPlayer.tag == "Player")
             {
                 //_enemyPlayerHealth.DoDamage(20);
-                ApplyRPSLogic(_enemyPlayerHealth);
+                ApplyRPSLogic(_enemyPlayer);
             }
         }
     }

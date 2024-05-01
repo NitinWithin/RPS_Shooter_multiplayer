@@ -42,6 +42,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_DestroyObjectByViewID
   - SetTagAndLayer
+  - FixedUpdate
+  - TimerTextUpdate
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
