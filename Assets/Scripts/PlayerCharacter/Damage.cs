@@ -6,7 +6,6 @@ using UnityEngine;
 public class Damage : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Variables
-    [SerializeField] TMP_Text _healthText;
     [SerializeField] private int _health = 100;
     private Renderer[] _visuals;
     #endregion
@@ -69,7 +68,6 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     public void DoDamage(int damage)
     {
         _health -= damage;
-        _healthText.text = _health.ToString();
     }
     #endregion
 }

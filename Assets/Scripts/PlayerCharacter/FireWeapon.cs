@@ -10,7 +10,8 @@ public class FireWeapon : MonoBehaviourPunCallbacks
 {
     #region Variables
     [SerializeField] Transform _lasergun;
-    [SerializeField] ParticleSystem _particleSystem;
+    [SerializeField] GameObject _particleSystem;
+    [SerializeField] private float bulletSpeed = 10f;
 
     private GameObject _player;
 
@@ -43,13 +44,27 @@ public class FireWeapon : MonoBehaviourPunCallbacks
             WeaponAim();
             if (Input.GetMouseButtonDown(0))
             {
-                photonView.RPC("RPC_Shoot", RpcTarget.AllBuffered);
+                //RPC_Shoot();
+                photonView.RPC("RPC_Shoot", RpcTarget.AllBuffered, gameObject.GetPhotonView().Owner);
             }
         }
     }
     #endregion
 
     #region private methods
+    private GameObject GetPlayerGameObject(Player player)
+    {
+        PhotonView[] photonViews = GameObject.FindObjectsOfType<PhotonView>();
+        foreach (PhotonView view in photonViews)
+        {
+            if (view.Owner == player)
+            {
+                return view.gameObject;
+            }
+        }
+        return null;
+    }
+
     private void StunPlayer(GameObject _enemyPlayer)
     {
         if (!isStunned)
@@ -84,31 +99,36 @@ public class FireWeapon : MonoBehaviourPunCallbacks
         _lasergun.LookAt(targetPosition);
     }
 
-    public void ApplyRPSLogic(GameObject _enemyPlayer)
+    public void ApplyRPSLogic(Player Shooter)
     {
-        Player enemyPlayer = _enemyPlayer.GetPhotonView().GetComponent<Player>();
-        int enemyCharacter = (int)_enemyPlayer.GetPhotonView().GetComponent<Player>().CustomProperties["CSN"];
-        int playerCharacter = (int)PhotonNetwork.LocalPlayer.CustomProperties["CSN"];
+        GameObject _shooter = GetPlayerGameObject(Shooter);
+        
+        Player enemyPlayer = gameObject.GetPhotonView().Owner;
+        int enemyCharacter = (int)enemyPlayer.CustomProperties["CSN"];
+        int playerCharacter = (int)_shooter.GetPhotonView().Owner.CustomProperties["CSN"];
 
-        if (enemyPlayer.GetPhotonTeam().Code == PhotonNetwork.LocalPlayer.GetPhotonTeam().Code) // When in the same team
+        if (_shooter.GetPhotonView().Owner.GetPhotonTeam().Code == enemyPlayer.GetPhotonTeam().Code) // When in the same team
         {
-            _enemyPlayer.GetComponent<Damage>().DoDamage(5);
+            Debug.Log("Same team");
+            gameObject.GetComponent<Damage>().DoDamage(5);
             OnDamageTaken?.Invoke(5);
         }
         else if(enemyCharacter == playerCharacter) // Same type
         {
-            PushPlayersBack(_player.transform, _enemyPlayer.transform);
+            Debug.Log("Applying RPS logic: PushBack applied");
+            PushPlayersBack(_player.transform, _shooter.transform);
         }
         else
         {
             if (counters.ContainsKey(playerCharacter) && counters[playerCharacter] == enemyCharacter) // Nemeis
             {
-                OnDamageTaken?.Invoke(20);
-                _enemyPlayer.GetComponent<Damage>().DoDamage(20);
+                Debug.Log("Applying RPS logic: damage taken");
+                gameObject.GetComponent<Damage>().DoDamage(20);
             }
             else
             {
-                StunPlayer(_enemyPlayer);
+                Debug.Log("Applying RPS logic: Stun Applied");
+                StunPlayer(_shooter);
             }
         }
 
@@ -138,24 +158,23 @@ public class FireWeapon : MonoBehaviourPunCallbacks
 
     #region Pun Methods
     [PunRPC]
-    private void RPC_Shoot()
+    private void RPC_Shoot(Player _enemyPlayer)
     {
-       _particleSystem.Play();
+        GameObject Bullet = Instantiate(_particleSystem, _lasergun.position, _lasergun.rotation);
+        Bullet.GetComponent<BulletMove>().Initialize(_enemyPlayer);
 
-        Ray ray = new Ray(_lasergun.position, _lasergun.forward);
-        if(Physics.Raycast(ray, out RaycastHit hit, 100f))
+        Rigidbody bulletRb = Bullet.GetComponent<Rigidbody>();
+        if (bulletRb != null)
         {
-            var _enemyPlayer = hit.collider.gameObject;
-
-            if(_enemyPlayer && _enemyPlayer.tag == "Player")
-            {
-                //_enemyPlayerHealth.DoDamage(20);
-                ApplyRPSLogic(_enemyPlayer);
-            }
+            bulletRb.velocity = _lasergun.forward * bulletSpeed;
         }
+        else
+        {
+            Debug.LogError("Bullet prefab does not have a Rigidbody component.");
+        }
+        Destroy(Bullet, 3);
     }
-    
+
     #endregion
 
-   
 }

@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lasergun: {fileID: 1891046175596178704}
-  _particleSystem: {fileID: 5567305523208821890}
+  _particleSystem: {fileID: 1654736843778140, guid: 78e8b38d431ddef4fa2994a3f2d6e2ff, type: 3}
 --- !u!114 &3178664467872700743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,11 +515,6 @@ PrefabInstance:
 --- !u!4 &1891046175596178704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1977652951475782042, guid: ae1884cec42cfe74f806843bec1f5de6, type: 3}
-  m_PrefabInstance: {fileID: 93538321668697226}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &5567305523208821890 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5480698759100526600, guid: ae1884cec42cfe74f806843bec1f5de6, type: 3}
   m_PrefabInstance: {fileID: 93538321668697226}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &622052880580011754
