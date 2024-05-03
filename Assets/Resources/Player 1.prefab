@@ -279,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lasergun: {fileID: 1891046175596178704}
   _particleSystem: {fileID: 1654736843778140, guid: 78e8b38d431ddef4fa2994a3f2d6e2ff, type: 3}
-  bulletSpeed: 20
+  bulletSpeed: 25
 --- !u!114 &3178664467872700743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _healthText: {fileID: 1953637181599736079}
+  _stunText: {fileID: 5855460348837431241}
 --- !u!1 &3096093712421892249
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +569,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2870884248278353692, guid: 22f08f34c179f8f4d801fd35008f4a76, type: 3}
   m_PrefabInstance: {fileID: 1335708920193270944}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5855460348837431241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4885176369474421609, guid: 22f08f34c179f8f4d801fd35008f4a76, type: 3}
+  m_PrefabInstance: {fileID: 1335708920193270944}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1853174954612685709
 PrefabInstance:
   m_ObjectHideFlags: 0

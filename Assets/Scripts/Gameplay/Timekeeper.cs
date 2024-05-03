@@ -7,12 +7,10 @@ public class Timekeeper : MonoBehaviour
 {
     [SerializeField] private PhotonView _timeKeeperPhotonView;
     private TMP_Text _timeText;
-    [SerializeField] private float _gameTimeInSeconds = 10f; // 5 minutes
+    [SerializeField] private float _gameTimeInSeconds = 180f; // 5 minutes
 
     private float elapsedTime = 0f;
     private bool isGameRunning = true;
-
-    public static Action OnTimeEnd = delegate { };
 
     private void Start()
     {
@@ -62,7 +60,6 @@ public class Timekeeper : MonoBehaviour
                 // Perform game over actions here
                 Debug.Log("Round Over");
 
-                OnTimeEnd?.Invoke();
             }
         }
     }

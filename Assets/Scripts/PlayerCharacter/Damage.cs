@@ -8,10 +8,10 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     #region Variables
     [SerializeField] private int _health = 100;
     [SerializeField] private TMP_Text _healthText;
+    [SerializeField] private TMP_Text _stunText;
 
     private Renderer[] _visuals;
     private bool isStunned = false;
-    private float stunDuration = 2f;
     #endregion
 
     #region Default Methods 
@@ -68,16 +68,17 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void StunPlayer(GameObject _enemyPlayer)
+    public void StunPlayer(GameObject _enemyPlayer, float stunDuration)
     {
         if (!isStunned)
         {
-            StartCoroutine(StunCoroutine(_enemyPlayer));
+            StartCoroutine(StunCoroutine(_enemyPlayer, stunDuration));
         }
     }
-    private IEnumerator StunCoroutine(GameObject _enemyPlayer)
+    private IEnumerator StunCoroutine(GameObject _enemyPlayer, float stunDuration)
     {
         isStunned = true;
+        _stunText.enabled = true;
         _enemyPlayer.GetComponent<FPSController>().enabled = false;
         _enemyPlayer.GetComponent<FireWeapon>().enabled = false;
 
@@ -89,6 +90,7 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
         _enemyPlayer.GetComponent<FireWeapon>().enabled = true;
 
         Debug.Log("Player is no longer stunned");
+        _stunText.enabled = false;
         isStunned = false;
     }
 
