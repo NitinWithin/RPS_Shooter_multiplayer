@@ -213,6 +213,7 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     private void RegisterUser()
     {
+        Debug.Log("Inside register USer");
         if (_regUserName != null &&  _regPassword != null && _regEmail != null)
         {
             var request = new RegisterPlayFabUserRequest {Email = _regEmail,
@@ -262,7 +263,7 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     public void SetRegPassword(string password)
     {
-        if (_passwordField.text.Length <= 6)
+        if (_passwordField.text.Length < 6)
         {
             ShowMessage("Password has to be more than 6 characters long", Color.red, 5f);
         }
@@ -271,6 +272,7 @@ public class PlayerLoginAndRegistration : MonoBehaviour
                     _passwordField.text == _confirmPasswordField.text)
         {
             _regPassword = password;
+            Debug.Log("Password set" + _regPassword);
         }
         else
         {
@@ -294,6 +296,7 @@ public class PlayerLoginAndRegistration : MonoBehaviour
 
     public void Registration()
     {
+        Debug.Log("Registration click");
         RegisterUser();
     }    
 

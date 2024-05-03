@@ -13,22 +13,17 @@ public class UIHealthUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        FireWeapon.OnDamageTaken += HandleHealthUpdate;
+        
         _currentHealth = int.Parse(_healthBarText.text);
     }
 
-    // Update is called once per frame
-    void OnDestroy()
-    {
-        FireWeapon.OnDamageTaken -= HandleHealthUpdate;
-    }
 
     #endregion
 
     #region Private Methods
-    private void HandleHealthUpdate(int damage)
+    public void HandleHealthUpdate(string Health)
     {
-        _healthBarText.text = (_currentHealth - damage).ToString();
+        _healthBarText.text = Health;
     }
     #endregion
 
