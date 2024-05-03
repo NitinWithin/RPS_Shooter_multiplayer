@@ -350,6 +350,7 @@ MonoBehaviour:
   _roomGameModeText: {fileID: 1771097662}
   _exitButton: {fileID: 69093763}
   _roomContainer: {fileID: 1996177750}
+  _startGameButton: {fileID: 1924900629}
   _hideObjects:
   - {fileID: 1518143319}
   - {fileID: 813457677}
@@ -369,12 +370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1879ba3f2c82d4e85215f0e829da7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectedGameMode: {fileID: 0}
+  _selectedGameMode: {fileID: 11400000, guid: f55ce02f65a50f140a895961657701dd, type: 2}
   _availableGameModes:
   - {fileID: 11400000, guid: f55ce02f65a50f140a895961657701dd, type: 2}
   _startGame: 0
   _currentCountDown: 0
-  _gameSceneIndex: 2
+  _gameSceneIndex: 3
 --- !u!1 &69093763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,6 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860d6b257bf0cc4a9398c4ed9a6d2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _partySystem: {fileID: 0}
   _inviteContainer: {fileID: 1587528871}
   _uiInvitePrefab: {fileID: 2589028288480306830, guid: a9028898049ac8645a85325237d5a8f8, type: 3}
 --- !u!1 &743221317

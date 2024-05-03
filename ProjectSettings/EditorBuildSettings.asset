@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayGround.unity
     guid: 3bc22b211fa86fc48ba665e6dedae1a2
+  - enabled: 1
+    path: Assets/Scenes/tomb 1.unity
+    guid: 6f7314d1193b87044a0505baf6165483
   m_configObjects: {}

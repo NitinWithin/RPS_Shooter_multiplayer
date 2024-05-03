@@ -19,7 +19,7 @@ public class PhotonRoomController : MonoBehaviourPunCallbacks
 
     private const string GAME_MODE = "GAMEMODE";
     private const string START_GAME = "STARTGAME";
-    private const float GAME_COUNT_DOWN = 10f;
+    private const float GAME_COUNT_DOWN = 5f;
 
     public static Action<GameMode> OnJoinRoom = delegate { };
     public static Action<bool> OnRoomStatusChange = delegate { };

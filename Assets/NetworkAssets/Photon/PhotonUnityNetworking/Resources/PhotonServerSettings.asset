@@ -29,7 +29,7 @@ MonoBehaviour:
     EnableLobbyStatistics: 0
     NetworkLogging: 1
   DevRegion: eu
-  PunLogging: 2
+  PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
@@ -42,6 +42,11 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_DestroyObjectByViewID
   - SetTagAndLayer
+  - FixedUpdate
+  - TimerTextUpdate
+  - DoDamage
+  - PushPlayersBack
+  - StunPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -6,6 +6,7 @@ using UnityEngine;
 public class UIDisplayInvite : MonoBehaviour
 {
     #region Variables
+    [SerializeField] private GameObject _partySystem;
     [SerializeField] private Transform _inviteContainer;
     [SerializeField] private UIInvite _uiInvitePrefab;
 
@@ -35,6 +36,7 @@ public class UIDisplayInvite : MonoBehaviour
 
     private void HandleRoomInvite(string friend, string room)
     {
+        _partySystem.GetComponent<UIToggle>().ToggleObjects();
         Debug.Log("HandleRoomInvite: From: " + friend + " RoomName: " + room);
         UIInvite uiprefab = Instantiate(_uiInvitePrefab, _inviteContainer);
         uiprefab.Initialize(friend, room);

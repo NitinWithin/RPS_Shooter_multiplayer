@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Scissors
-  - Rock
-  - Paper
+  - IgnoreObjects
   layers:
   - Default
   - TransparentFX

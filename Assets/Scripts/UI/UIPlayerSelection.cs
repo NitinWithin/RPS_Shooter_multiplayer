@@ -36,8 +36,9 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
     {
         _owner = player;
         _currentSelection = GetCharacterSelection();
+        Debug.Log("Current Selction " + _currentSelection);
         SetUpPlayerSelection();
-        UpdateCharacterModel(_currentSelection);
+        UpdateCharacterSelection(_currentSelection);
     }
     #endregion
 
@@ -59,7 +60,7 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
             _nextButton.SetActive(false) ;
         }
 
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             ShowMasterClientUI();
         }
@@ -73,7 +74,7 @@ public class UIPlayerSelection : MonoBehaviourPunCallbacks
         }
         if(PhotonNetwork.LocalPlayer.Equals(_owner))
         {
-            _kickButton.SetActive(false );
+            _kickButton.SetActive(false);
         }
         else
         {
