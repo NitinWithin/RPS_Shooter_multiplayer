@@ -2126,6 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860d6b257bf0cc4a9398c4ed9a6d2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _partySystem: {fileID: 0}
   _inviteContainer: {fileID: 1587528871}
   _uiInvitePrefab: {fileID: 2589028288480306830, guid: a9028898049ac8645a85325237d5a8f8, type: 3}
 --- !u!1 &743221317
