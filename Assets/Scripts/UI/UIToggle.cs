@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIToggle : MonoBehaviour
@@ -7,6 +5,8 @@ public class UIToggle : MonoBehaviour
     #region Variables
     [SerializeField] private GameObject toggleObject;
     [SerializeField] private GameObject[] toggleObjects;
+    [SerializeField] private GameObject[] toggleOffObjects;
+    [SerializeField] private GameObject[] toggleOnObjects;
     #endregion
 
     #region Public methods
@@ -29,21 +29,27 @@ public class UIToggle : MonoBehaviour
 
     public void ToggleOffObejcts()
     {
-        if (toggleObjects == null) return;
+        if (toggleOffObjects == null) return;
 
-        foreach (GameObject obj in toggleObjects)
+        foreach (GameObject obj in toggleOffObjects)
         {
-            obj.SetActive(false);
+            if(obj.activeSelf)
+            {
+                obj.SetActive(false);
+            }
         }
     }
 
     public void ToggleOnObejcts()
     {
-        if (toggleObjects == null) return;
+        if (toggleOnObjects == null) return;
 
-        foreach (GameObject obj in toggleObjects)
+        foreach (GameObject obj in toggleOnObjects)
         {
-            obj.SetActive(true);
+            if(!obj.activeSelf)
+            {
+                obj.SetActive(true);
+            }
         }
     }
 
