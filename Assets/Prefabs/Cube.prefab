@@ -377,6 +377,8 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5694491815053519545}
+  - {fileID: 629084393333118367}
   - {fileID: 2870884248278353692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -494,9 +496,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 5, z: 2}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 629084393333118367}
-  - {fileID: 5694491815053519545}
+  m_Children: []
   m_Father: {fileID: 2114500688298748903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3400051432854412270
@@ -591,7 +591,7 @@ RectTransform:
   m_Children:
   - {fileID: 4996973322446305111}
   - {fileID: 7706683669084445111}
-  m_Father: {fileID: 2870884248278353692}
+  m_Father: {fileID: 2114500688298748903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -607,7 +607,7 @@ Canvas:
   m_GameObject: {fileID: 8747577484617754924}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 3400051432854412270}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -667,14 +667,26 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2870884248278353692}
+    m_TransformParent: {fileID: 2114500688298748903}
     m_Modifications:
+    - target: {fileID: 780102918423090213, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6703634263828285254}
+    - target: {fileID: 1047497206248004931, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6703634263828285254}
     - target: {fileID: 2766568815406086306, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2766568815406086306, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3674856779346281913, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 3400051432854412270}
+    - target: {fileID: 3674856779346281913, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
+      propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5741083940011516253, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
@@ -727,15 +739,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5741083940011516253, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5741083940011516253, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5741083940011516253, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5741083940011516253, guid: 52f14a448428adb48b29eba7d5d9f8b3, type: 3}
       propertyPath: m_AnchoredPosition.x
