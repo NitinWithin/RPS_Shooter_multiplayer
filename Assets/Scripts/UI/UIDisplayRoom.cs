@@ -7,6 +7,7 @@ public class UIDisplayRoom : MonoBehaviour
 {
     #region Variables
     [SerializeField] private TMP_Text _roomGameModeText;
+    [SerializeField] private GameObject _HeaderText;
     [SerializeField] private GameObject _exitButton;
     [SerializeField] private GameObject _roomContainer;
     [SerializeField] private GameObject _startGameButton;
@@ -35,8 +36,8 @@ public class UIDisplayRoom : MonoBehaviour
     #region Private Methods
     private void HandleOnJoinRoom(GameMode mode)
     {
-        _roomGameModeText.SetText(PhotonNetwork.CurrentRoom.CustomProperties["GAMEMODE"].ToString());
-
+        _roomGameModeText.enabled = true;
+       
         _exitButton.SetActive(true);
         _roomContainer.SetActive(true);
 
@@ -57,6 +58,8 @@ public class UIDisplayRoom : MonoBehaviour
 
     private void HandleOnRoomLeft()
     {
+        _HeaderText.SetActive(false);
+        _roomGameModeText.enabled = true;
         _roomGameModeText.SetText("JOINING ROOM");
 
         _exitButton.SetActive(false);
@@ -78,6 +81,10 @@ public class UIDisplayRoom : MonoBehaviour
 
     public void StartGame()
     {
+        _HeaderText.SetActive(false);
+        _roomGameModeText.enabled = true;
+        _startGameButton.SetActive(false);
+        _roomGameModeText.SetText("JOINING ROOM");
         Debug.Log($"Starting game...");
         OnStartGame?.Invoke();
     }

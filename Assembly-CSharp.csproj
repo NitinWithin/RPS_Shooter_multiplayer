@@ -114,6 +114,7 @@
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
     <Compile Include="Assets\Scripts\UI\UIDisplayInvite.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameMaster.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonFriendsController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\BulletMove.cs" />
