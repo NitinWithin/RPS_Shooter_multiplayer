@@ -261,7 +261,7 @@ MonoBehaviour:
   _gravity: -15
   _movementSpeed: 10
   _jumpSpeed: 10
-  _cameraTransform: {fileID: 0}
+  _cameraTransform: {fileID: 431921051177892208}
   _maxPitch: 45
   _minPitch: -45
   _mouseSensitivity: 2

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - IgnoreObjects
+  - Timer
+  - Team Manager
   layers:
   - Default
   - TransparentFX
