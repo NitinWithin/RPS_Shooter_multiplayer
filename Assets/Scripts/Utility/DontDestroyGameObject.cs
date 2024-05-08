@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoilerTemplate : MonoBehaviour
+public class DontDestroyGameObject : MonoBehaviour
 {
-
     #region Variables
 
     #endregion
 
     #region Default Unity Methods
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Team Manager");
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (objs.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
     #endregion
 
@@ -38,5 +40,4 @@ public class BoilerTemplate : MonoBehaviour
     #region Playfab callbacks
 
     #endregion
-
 }

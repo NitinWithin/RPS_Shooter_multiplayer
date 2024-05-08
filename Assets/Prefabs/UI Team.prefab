@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258689702920917134}
   - component: {fileID: 8428226198404525936}
+  - component: {fileID: 2814186521204338913}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -64,6 +65,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &2814186521204338913
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907796456484790581}
+  m_CullTransparentMesh: 1
 --- !u!1 &958910031718798800
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,8 +296,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f4d504d307dcd4648bd3583dca39b415, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -384,6 +393,8 @@ GameObject:
   - component: {fileID: 7779093429941523737}
   - component: {fileID: 5497097117023776401}
   - component: {fileID: 3502836955869449520}
+  - component: {fileID: 3745990492235811627}
+  - component: {fileID: 6423838701169921056}
   m_Layer: 5
   m_Name: UI Team
   m_TagString: Untagged
@@ -458,6 +469,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &3745990492235811627
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288602502176746751}
+  m_CullTransparentMesh: 1
+--- !u!114 &6423838701169921056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288602502176746751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.21568629, b: 0.3803922, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4491772990411811601
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789637940382662688}
   - component: {fileID: 39267569662155398}
+  - component: {fileID: 5997339909497247740}
   m_Layer: 5
   m_Name: PlayerSelectionContainer
   m_TagString: Untagged
@@ -520,6 +570,14 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!222 &5997339909497247740
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491772990411811601}
+  m_CullTransparentMesh: 1
 --- !u!1 &8180570885999983754
 GameObject:
   m_ObjectHideFlags: 0

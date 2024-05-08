@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\PlayerCharacter\FPSController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
+    <Compile Include="Assets\Scripts\UI\UIScoreUpdate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonConnector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -114,6 +115,8 @@
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
     <Compile Include="Assets\Scripts\UI\UIDisplayInvite.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Scripts\UI\UIFetchGameScore.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameMaster.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonFriendsController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\BulletMove.cs" />
@@ -126,7 +129,6 @@
     <Compile Include="Assets\Scripts\Gameplay\GameMode.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-    <Compile Include="Assets\Scripts\BoilerTemplate.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\UI\UIHealthUpdate.cs" />
@@ -135,7 +137,9 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\Damage.cs" />
+    <Compile Include="Assets\Scripts\Utility\DontDestroyGameObject.cs" />
     <Compile Include="Assets\Scripts\UI\UIPauseMenu.cs" />
+    <Compile Include="Assets\Scripts\Utility\BoilerTemplate.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter\CharacterSet.cs" />

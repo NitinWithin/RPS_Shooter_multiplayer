@@ -12,6 +12,7 @@ public class Timekeeper : MonoBehaviour
     private float elapsedTime = 0f;
     private bool isGameRunning = true;
 
+    public static Action OnRoundTimeEnded = delegate { };
     private void Start()
     {
         _timeText = GameObject.FindGameObjectWithTag("Timer").GetComponent<TMP_Text>();
@@ -59,7 +60,8 @@ public class Timekeeper : MonoBehaviour
                 isGameRunning = false;
                 // Perform game over actions here
                 Debug.Log("Round Over");
-
+                OnRoundTimeEnded?.Invoke();
+                
             }
         }
     }

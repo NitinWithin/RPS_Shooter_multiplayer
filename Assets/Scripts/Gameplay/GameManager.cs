@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Default methods
+
+    private void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     void Start()
     {
         StartCoroutine(DelayedInstantiatePlayer());

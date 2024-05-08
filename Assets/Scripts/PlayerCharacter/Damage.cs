@@ -9,12 +9,20 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private int _health = 100;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _stunText;
+    [SerializeField] private GameObject _DeathText;
+
+    public bool _isDead = false;
 
     private Renderer[] _visuals;
     private bool isStunned = false;
     #endregion
 
     #region Default Methods 
+    private void Awake()
+    {
+        _DeathText.SetActive(false);
+        _stunText.enabled = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +34,14 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(_health <= 0)
         {
-            StartCoroutine(Respawn());
+            _isDead = true;
+            _DeathText.SetActive( true);
+            //StartCoroutine(Respawn());
+
+            VisualizeRenderer(false);
+            GetComponent<CharacterController>().enabled = false;
+            GetComponent<FireWeapon>().enabled = false; 
+            
         }
     }
     #endregion
@@ -67,14 +82,6 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    [PunRPC]
-    public void StunPlayer(GameObject _enemyPlayer, float stunDuration)
-    {
-        if (!isStunned)
-        {
-            StartCoroutine(StunCoroutine(_enemyPlayer, stunDuration));
-        }
-    }
     private IEnumerator StunCoroutine(GameObject _enemyPlayer, float stunDuration)
     {
         isStunned = true;
@@ -97,6 +104,16 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region public methods
+
+    [PunRPC]
+    public void StunPlayer(PhotonView _enemyPlayer, float stunDuration)
+    {
+        if (!isStunned)
+        {
+            StartCoroutine(StunCoroutine(_enemyPlayer.gameObject, stunDuration));
+        }
+    }
+
     [PunRPC]
     public void DoDamage(int damage)
     {
