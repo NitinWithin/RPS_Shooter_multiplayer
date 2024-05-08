@@ -4,13 +4,11 @@ using UnityEngine;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections.Generic;
-using System;
 using TMPro;
 
-public class GameMaster : MonoBehaviour, IPunObservable
+public class GameMaster : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private GameObject _endRoundCanvas;
     private GameObject[] _playersInRoom;
     private int _deadPlayerCountTeamA;
     private int _deadPlayerCountTeamB;
@@ -21,11 +19,6 @@ public class GameMaster : MonoBehaviour, IPunObservable
     #endregion
 
     #region Default Unity Methods
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,7 +28,6 @@ public class GameMaster : MonoBehaviour, IPunObservable
             GetPlayersInRoom();
             AllPlayersInTeamKilled();
         }
-
     }
 
     #endregion
@@ -95,11 +87,7 @@ public class GameMaster : MonoBehaviour, IPunObservable
         {
             _teamAScore += 1;
         }
-        _endRoundCanvas.SetActive(true);
-        if (_endRoundCanvas.activeSelf)
-        {
-            GetComponent<UIScoreUpdate>().Initialize(_teamAScore, _teamBScore);
-        }
+       
         UpdateScoreToPlayFab(_teamAScore, _teamBScore);
     }
 
@@ -153,35 +141,19 @@ public class GameMaster : MonoBehaviour, IPunObservable
             _teamAScore = int.Parse(result.Data["TEAMASCORE"].Value);
             _teamBScore = int.Parse(result.Data["TEAMBSCORE"].Value);
         }
-        else
-        {
-            UpdateScoreToPlayFab(_teamAScore, _teamBScore);
-        }
+
     }
 
     private void UserDataUpdateSuccess(UpdateUserDataResult result)
     {
         Debug.Log("Score Updated : " + result.ToString());
 
-        gameObject.GetComponent<PhotonView>().RPC("RoundEndRPC", RpcTarget.All, _teamAScore, _teamBScore);
-        //RoundEndRPC();
+        PhotonNetwork.LoadLevel(4);
     }
 
     private void PlayFabCallBackFail(PlayFabError error)
     {
         Debug.LogError(error.GenerateErrorReport());
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(_roundEnd);
-        }
-        else
-        {
-            _roundEnd = (bool)stream.ReceiveNext();
-        }
     }
 
     #endregion

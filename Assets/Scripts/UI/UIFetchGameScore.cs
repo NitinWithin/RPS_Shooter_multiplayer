@@ -4,12 +4,11 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 
-public class UIFetchGameScore : MonoBehaviour, IPunObservable
+public class UIFetchGameScore : MonoBehaviour
 {
     #region Variables
     [SerializeField] private TMP_Text _teamAScore;
     [SerializeField] private TMP_Text _teamBScore;
-
 
     #endregion
 
@@ -17,7 +16,10 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
 
     void Start()
     {
-        FetchScoreFromPlayFab();
+        if(PhotonNetwork.IsMasterClient)
+        {
+            FetchScoreFromPlayFab();
+        }
     }
 
     #endregion
@@ -32,23 +34,6 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
             PlayFabClientAPI.GetUserData(request, GetGameScoreSuccess, PlayFabRequestFail);
         }
 
-    }
-
-    #endregion
-
-    #region Public methods
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(_teamAScore.text);
-            stream.SendNext(_teamBScore.text);
-        }
-        else
-        {
-            _teamAScore.text = (string)stream.ReceiveNext();
-            _teamBScore.text = (string)stream.ReceiveNext();
-        }
     }
 
     #endregion
