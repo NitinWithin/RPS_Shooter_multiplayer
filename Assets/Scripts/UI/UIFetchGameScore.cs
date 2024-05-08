@@ -9,7 +9,7 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
     #region Variables
     [SerializeField] private TMP_Text _teamAScore;
     [SerializeField] private TMP_Text _teamBScore;
-
+    [SerializeField] private bool _checkWinCondition = false;
 
     #endregion
 
@@ -17,7 +17,10 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
 
     void Start()
     {
-        FetchScoreFromPlayFab();
+        if(PhotonNetwork.IsMasterClient)
+        {
+            FetchScoreFromPlayFab();
+        }
     }
 
     #endregion
@@ -26,28 +29,19 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
 
     private void FetchScoreFromPlayFab()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            var request = new GetUserDataRequest { PlayFabId = PlayerPrefs.GetString("PLAYFABID") };
-            PlayFabClientAPI.GetUserData(request, GetGameScoreSuccess, PlayFabRequestFail);
-        }
+        var request = new GetUserDataRequest { PlayFabId = PlayerPrefs.GetString("PLAYFABID") };
+        PlayFabClientAPI.GetUserData(request, GetGameScoreSuccess, PlayFabRequestFail);
 
     }
 
-    #endregion
-
-    #region Public methods
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void CheckWinCondition()
     {
-        if (stream.IsWriting)
+        if (int.Parse(_teamAScore.text) + int.Parse(_teamBScore.text) == 3 )
         {
-            stream.SendNext(_teamAScore.text);
-            stream.SendNext(_teamBScore.text);
-        }
-        else
-        {
-            _teamAScore.text = (string)stream.ReceiveNext();
-            _teamBScore.text = (string)stream.ReceiveNext();
+           if(PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel(5);
+            }
         }
     }
 
@@ -61,6 +55,8 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
             _teamAScore.text = result.Data["TEAMASCORE"].Value;
             _teamBScore.text = result.Data["TEAMBSCORE"].Value;
         }
+        CheckWinCondition();
+
     }
 
     private void PlayFabRequestFail(PlayFabError error)
@@ -68,6 +64,19 @@ public class UIFetchGameScore : MonoBehaviour, IPunObservable
         Debug.Log(error.GenerateErrorReport());
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_teamAScore.text);
+            stream.SendNext(_teamBScore.text);
+        }
+        else
+        {
+            _teamAScore.text = stream.ReceiveNext().ToString();
+            _teamBScore.text = stream.ReceiveNext().ToString();
+        }
+    }
 
     #endregion
 }

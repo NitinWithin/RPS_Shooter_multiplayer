@@ -15,7 +15,7 @@ public class UIShowMenuforLocalPlayer : MonoBehaviour
         foreach (Canvas c in _pauseMenuCanvas)
         {
             //_canvasRenderer = _pauseMenuCanvas.GetComponent<Renderer>();
-            if (PhotonView.Get(this).IsMine)
+            if (gameObject.GetComponent<PhotonView>().IsMine)
             {
                 // This Canvas belongs to the local player, so activate it
                 c.enabled = true;

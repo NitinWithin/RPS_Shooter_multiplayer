@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     #region Variables
     [SerializeField] private GameObject[] _TeamAplayerPrefab;
     [SerializeField] private GameObject[] _TeamBplayerPrefab;
-    [SerializeField] private float delayInSeconds = 1f;
+    [SerializeField] private float delayInSeconds = 5f;
     [SerializeField] private Vector3[] _spawnPositions;
 
     private int _characterSelection;
