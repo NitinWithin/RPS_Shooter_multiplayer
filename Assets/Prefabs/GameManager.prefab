@@ -206,8 +206,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4368424752063169782}
+  - component: {fileID: 2624564378066109909}
   - component: {fileID: 6334159190667524399}
   - component: {fileID: 2073739706531027036}
+  - component: {fileID: 8465102008466081921}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -231,6 +233,29 @@ Transform:
   - {fileID: 3033350046249994156}
   m_Father: {fileID: 7300464718392772174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2624564378066109909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325008463538776704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2073739706531027036}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &6334159190667524399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +286,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endRoundCanvas: {fileID: 5209950453751751794}
+--- !u!114 &8465102008466081921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325008463538776704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2388a47f5ce4f7a49b644d79b94a8c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startRoundButton: {fileID: 3657761098493669849}
+  _teamAScoreText: {fileID: 8385939611254600844}
+  _teamBScoreText: {fileID: 1646035635185350618}
 --- !u!1 &539718287127695024
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +312,6 @@ GameObject:
   - component: {fileID: 847659619030622212}
   - component: {fileID: 6802030445560204564}
   - component: {fileID: 6574751430581988788}
-  - component: {fileID: 2496449844520138214}
   m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
@@ -336,20 +375,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2496449844520138214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 539718287127695024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2388a47f5ce4f7a49b644d79b94a8c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _teamAScoreText: {fileID: 0}
-  _teamBScoreText: {fileID: 0}
 --- !u!1 &641286032837883173
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +565,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2496449844520138214}
+      - m_Target: {fileID: 8465102008466081921}
         m_TargetAssemblyTypeName: UIScoreUpdate, Assembly-CSharp
         m_MethodName: StartNextRound
         m_Mode: 1

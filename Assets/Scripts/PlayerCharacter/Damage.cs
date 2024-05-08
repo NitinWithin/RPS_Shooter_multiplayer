@@ -106,11 +106,11 @@ public class Damage : MonoBehaviourPunCallbacks, IPunObservable
     #region public methods
 
     [PunRPC]
-    public void StunPlayer(GameObject _enemyPlayer, float stunDuration)
+    public void StunPlayer(PhotonView _enemyPlayer, float stunDuration)
     {
         if (!isStunned)
         {
-            StartCoroutine(StunCoroutine(_enemyPlayer, stunDuration));
+            StartCoroutine(StunCoroutine(_enemyPlayer.gameObject, stunDuration));
         }
     }
 

@@ -4,8 +4,10 @@ using UnityEngine;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections.Generic;
+using System;
+using TMPro;
 
-public class GameMaster : MonoBehaviour
+public class GameMaster : MonoBehaviour, IPunObservable
 {
     #region Variables
     [SerializeField] private GameObject _endRoundCanvas;
@@ -78,8 +80,7 @@ public class GameMaster : MonoBehaviour
             _teamAWins = true;
             UpdatePlayFabWithRoundData();
         }
-
-        
+ 
     }
 
     private void UpdatePlayFabWithRoundData()
@@ -94,7 +95,11 @@ public class GameMaster : MonoBehaviour
         {
             _teamAScore += 1;
         }
-
+        _endRoundCanvas.SetActive(true);
+        if (_endRoundCanvas.activeSelf)
+        {
+            GetComponent<UIScoreUpdate>().Initialize(_teamAScore, _teamBScore);
+        }
         UpdateScoreToPlayFab(_teamAScore, _teamBScore);
     }
 
@@ -115,15 +120,28 @@ public class GameMaster : MonoBehaviour
         PlayFabClientAPI.GetUserData(request, GetScoreDataSuccess, PlayFabCallBackFail);
     }
 
-
     #endregion
 
     #region Public methods
+    [PunRPC]
+    public void RoundEndRPC(int teamAScore, int teamBScore)
+    {
+        GameObject.Find("TeamAScore").GetComponent<TMP_Text>().text = teamAScore.ToString();
+        GameObject.Find("TeamBScore").GetComponent<TMP_Text>().text = teamBScore.ToString();
 
-    #endregion
-
-    #region PUN callbacks
-
+        if(_playersInRoom == null)
+        {
+            GetPlayersInRoom();
+        }
+        foreach (var player in _playersInRoom)
+        {
+            if (player.GetComponent<PhotonView>().Owner.IsLocal)
+            {
+                player.GetComponent<FPSController>().enabled = false;
+                player.GetComponent<FireWeapon>().enabled = false;
+            }
+        }
+    }
     #endregion
 
     #region Playfab callbacks
@@ -144,13 +162,26 @@ public class GameMaster : MonoBehaviour
     private void UserDataUpdateSuccess(UpdateUserDataResult result)
     {
         Debug.Log("Score Updated : " + result.ToString());
-        _endRoundCanvas.SetActive(true);
-        _endRoundCanvas.GetComponent<UIScoreUpdate>().Initialize(_teamAScore, _teamBScore);
+
+        gameObject.GetComponent<PhotonView>().RPC("RoundEndRPC", RpcTarget.All, _teamAScore, _teamBScore);
+        //RoundEndRPC();
     }
 
     private void PlayFabCallBackFail(PlayFabError error)
     {
         Debug.LogError(error.GenerateErrorReport());
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_roundEnd);
+        }
+        else
+        {
+            _roundEnd = (bool)stream.ReceiveNext();
+        }
     }
 
     #endregion

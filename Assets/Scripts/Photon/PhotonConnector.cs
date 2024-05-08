@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Linq;
 
 public class PhotonConnector : MonoBehaviourPunCallbacks
 {

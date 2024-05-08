@@ -46,7 +46,7 @@ public class BulletMove : MonoBehaviourPunCallbacks
         else if (enemyCharacter == playerCharacter) // Same type
         {
             Debug.Log("Applying RPS logic: PushBack applied");
-            enemyPlayer.GetPhotonView().RPC("StunPlayer", RpcTarget.All, _shooter, enemyPlayer, 1.5f);
+            enemyPlayer.GetPhotonView().RPC("StunPlayer", RpcTarget.All, _shooter.GetPhotonView(), 1.5f);
             
         }
         else
@@ -59,7 +59,7 @@ public class BulletMove : MonoBehaviourPunCallbacks
             else
             {
                 Debug.Log("Applying RPS logic: Stun Applied");
-                enemyPlayer.GetPhotonView().RPC("StunPlayer", RpcTarget.All, enemyPlayer, 3f);
+                enemyPlayer.GetPhotonView().RPC("StunPlayer", RpcTarget.All, enemyPlayer.GetPhotonView(), 3f);
             }
         }
 
@@ -77,5 +77,6 @@ public class BulletMove : MonoBehaviourPunCallbacks
         }
         return null;
     }
+
 
 }

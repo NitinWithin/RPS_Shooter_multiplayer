@@ -163,6 +163,8 @@ MonoBehaviour:
   _health: 100
   _healthText: {fileID: 1953637181599736079}
   _stunText: {fileID: 5855460348837431241}
+  _DeathText: {fileID: 8329985998581171518}
+  _isDead: 0
 --- !u!54 &979704051726997057
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -408,6 +410,11 @@ MonoBehaviour:
 --- !u!223 &8106315195480379020 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 7130903101699344940, guid: 22f08f34c179f8f4d801fd35008f4a76, type: 3}
+  m_PrefabInstance: {fileID: 1335708920193270944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8329985998581171518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6995051255439049118, guid: 22f08f34c179f8f4d801fd35008f4a76, type: 3}
   m_PrefabInstance: {fileID: 1335708920193270944}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1853174954612685709
