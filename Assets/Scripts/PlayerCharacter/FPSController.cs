@@ -37,8 +37,6 @@ public class FPSController : MonoBehaviourPunCallbacks, IPunObservable
             GetComponentInChildren<Camera>().enabled = false;
             GetComponentInChildren<AudioListener>().enabled = false;
         }
-        // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
 
@@ -55,20 +53,7 @@ public class FPSController : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region Private methods
-    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
-    {
-        this.CalledOnLevelWasLoaded(scene.buildIndex);
-    }
 
-
-    void CalledOnLevelWasLoaded(int level)
-    {
-        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
-        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
-        {
-            transform.position = new Vector3(0f, 5f, 0f);
-        }
-    }
     private void PlayerMovement()
     {
         Vector3 _input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
