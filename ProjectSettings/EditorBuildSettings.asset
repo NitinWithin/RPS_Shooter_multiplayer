@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoundEndScene.unity
     guid: 59e606001dc8c3d47bfc0d9f2e025b92
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5063620e9a96621419186b8a21e5caf9
   m_configObjects: {}

@@ -81,10 +81,10 @@
     <Compile Include="Assets\Scripts\Gameplay\GameManager.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonChatFriendController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Timekeeper.cs" />
+    <Compile Include="Assets\Scripts\UI\UICheckWinCondition.cs" />
     <Compile Include="Assets\Scripts\UI\UIDisplayFriends.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
     <Compile Include="Assets\Scripts\TestScipts\player.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter\CrossHairController.cs" />
     <Compile Include="Assets\Scripts\Photon\PhotonRoomController.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
     <Compile Include="Assets\NetworkAssets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
@@ -127,7 +127,6 @@
     <None Include="Assets\NetworkAssets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\Art\WorldMaterialsFree\Shaders\WorldMatFree.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\Art\8K Skybox Pack Free\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\NetworkAssets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll" />
@@ -159,7 +158,6 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\NetworkAssets\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Art\Hovl Studio\Procedural fire\Demo scene\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8799980876571577366}
   - component: {fileID: 2906764820636031531}
   - component: {fileID: 3797001865944941897}
+  - component: {fileID: 7420080081235503580}
+  - component: {fileID: 7033549817686584843}
   m_Layer: 0
   m_Name: PlayerGameUI
   m_TagString: Untagged
@@ -119,6 +121,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamAScore: {fileID: 7600629246827202068}
   _teamBScore: {fileID: 8186809598407876494}
+--- !u!114 &7420080081235503580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143775384511174105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &7033549817686584843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143775384511174105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3797001865944941897}
+  - {fileID: 7420080081235503580}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4448974972012487972
 GameObject:
   m_ObjectHideFlags: 0

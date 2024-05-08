@@ -1,5 +1,5 @@
 using Photon.Pun;
-using TMPro;
+using System.Collections;
 using UnityEngine;
 
 public class UIRoundStartButton : MonoBehaviour
@@ -9,16 +9,19 @@ public class UIRoundStartButton : MonoBehaviour
 
     #endregion
 
+    #region Default UNity methods
+
+    private void Start()
+    {
+        StartCoroutine(RestartLevel());
+    }
+    #endregion
+
     #region Public methods
 
-    public void StartNextRound()
+    private IEnumerator RestartLevel()
     {
-        RestartLevel();
-
-    }
-
-    public void RestartLevel()
-    {
+        yield return new WaitForSeconds(10f);
         PhotonNetwork.LoadLevel(3);
     }
     #endregion

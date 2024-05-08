@@ -78,17 +78,8 @@ public class GameMaster : MonoBehaviour
     private void UpdatePlayFabWithRoundData()
     {
         GetScoresFromPlayFab();
-
-        if (_teamBWins)
-        {
-            _teamBScore += 1;
-        }
-        if (_teamAWins)
-        {
-            _teamAScore += 1;
-        }
        
-        UpdateScoreToPlayFab(_teamAScore, _teamBScore);
+        
     }
 
     private void UpdateScoreToPlayFab(int teamAScore, int teamBScore)
@@ -107,6 +98,7 @@ public class GameMaster : MonoBehaviour
         var request = new GetUserDataRequest { PlayFabId = PlayerPrefs.GetString("PLAYFABID") };
         PlayFabClientAPI.GetUserData(request, GetScoreDataSuccess, PlayFabCallBackFail);
     }
+
 
     #endregion
 
@@ -142,6 +134,16 @@ public class GameMaster : MonoBehaviour
             _teamBScore = int.Parse(result.Data["TEAMBSCORE"].Value);
         }
 
+        if (_teamBWins)
+        {
+            _teamBScore += 1;
+        }
+        if (_teamAWins)
+        {
+            _teamAScore += 1;
+        }
+
+        UpdateScoreToPlayFab(_teamAScore, _teamBScore);
     }
 
     private void UserDataUpdateSuccess(UpdateUserDataResult result)
